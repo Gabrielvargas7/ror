@@ -1,0 +1,33 @@
+helper_rake
+
+#####
+Populate data 
+####
+
+rake db:populate
+
+#####
+Start sunspot 
+####
+
+	rake sunspot:solr:start
+
+
+	-- create index 
+	rake sunspot:reindex
+
+
+bundle exec rake db:drop RAILS_ENV=test
+bundle exec rake db:create RAILS_ENV=test
+			rake db:create:all
+bundle exec rake db:schema:load RAILS_ENV=test
+
+
+ rake db:schema:dump
+
+
+
+ ########
+ custom rake
+ ########
+bundle exec rake db:populate_somathing RAILS_ENV=production 

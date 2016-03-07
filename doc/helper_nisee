@@ -1,0 +1,423 @@
+**********************
+helper cert for tomcat 
+*********************
+Ubunto
+
+Server version: Apache Tomcat/5.5.28
+Server built:   Jul 24 2009 01:33:09
+Server number:  5.5.28.0
+OS Name:        Linux
+OS Version:     3.2.0-67-generic
+Architecture:   amd64
+JVM Version:    1.6.0_33-b33
+JVM Vendor:     Sun Microsystems Inc.
+root@nisee:/usr/local/tomcat/server#  
+
+--- get version of tomcat 
+java -cp /usr/local/tomcat/server/lib/catalina.jar org.apache.catalina.util.ServerInfo
+
+
+path:  /etc/ssl/certs
+
+path: /etc/ssl/private
+
+apache path: /etc/apache2/sites-enabled
+
+test apache files before restart 
+
+---  apachectl configtest   or --- apache2ctl configtest
+
+
+backup apache ssl file 
+
+	SSLCertificateFile    /etc/ssl/certs/ssl-cert-snakeoil.pem
+	SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+
+New apache ssl file 
+
+	SSLCertificateFile    /etc/ssl/certs/nisee_berkeley_edu.cer
+	SSLCertificateKeyFile /etc/ssl/private/nisee_berkeley_edu.key
+
+restart apache ubuntu  
+
+ 		sudo /etc/init.d/apache2 restart	
+
+ 		expire: Oct 23 2014
+
+rename file 
+	mv old-file-name  new-file-name
+	mv  default-ssl.BACKUP  default-ssl 		 
+
+	mv  default-ssl  default-ssl.000 
+
+	mv default-ssl.000 /etc/apache2/backup/default-ssl.00
+
+
+
+nisee app:  /home/nisee/public_html
+nisee app:  /usr/local/tomcat/webapps/elibrary/
+
+Tomcat folder 
+	/usr/local/Tomcat
+
+    /usr/local/tomcat/conf
+
+
+Key certificate 
+openssl req -nodes -newkey rsa:2048 -keyout myserver.key -out server.csr 
+
+		
+	
+openssl pkcs12 -export -in mycert.crt -inkey mykey.key
+                        -out mycert.p12 -name tomcat -CAfile myCA.crt
+                        -caname root -chain
+
+
+keytool -genkey -keyalg RSA -keysize 2048 -keystore domain.keystore
+
+
+1.- keytool -genkey -keyalg RSA -keysize 2048 -keystore nisee_tomcat_1.keystore
+-- create csr file 
+2.- keytool -certreq -keyalg RSA -file nisee_tomcat_1.csr -keystore nisee_tomcat_1.keystore
+
+
+keytool -genkey -alias [youralias] -keyalg RSA -keystore [/preferred/keystore/path]
+
+keytool -genkey -alias tomcat_test -keyalg RSA -keystore /home/gabrielvargas7/
+
+--------------------
+---- values to generate the key----------------
+--------------------
+
+   writing new private key to 'myserver_tomcat.key'
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:US
+State or Province Name (full name) [Some-State]:CA
+Locality Name (eg, city) []:Berkeley
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:UC Berkeley
+Organizational Unit Name (eg, section) []:Pacific Earthquake Engineering Research Center
+Common Name (e.g. server FQDN or YOUR name) []:nisee.berkeley.edu
+Email Address []:
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:tomkey
+An optional company name []:  
+gabrielvargas7@nisee:~$ ls
+---------------------- 
+---------------------- 
+---------------------- 
+
+########
+ restart tomcat
+########  
+service tomcat restart
+########
+check logs  
+#####
+
+cat /usr/local/tomcat/logs/catalina.out
+
+
+**********************
+add cer to tomcat 
+**********************
+
+1.- copy cer file to server. 
+scp -r  /Users/gabrielvargas7/Documents/nisee/nisee_berkeley_edu.cer  nisee.berkeley.edu:/home/gabrielvargas7/nisee_berkeley_edu.cer 
+scp -r  /Users/gabrielvargas7/Documents/nisee/nisee_berkeley_edu_cert.cer  nisee.berkeley.edu:/home/gabrielvargas7/nisee_berkeley_edu_cert.cer 
+
+
+2.- 
+copy files to usr/local/tomcat/conf
+
+cp /home/gabrielvargas7/nisee_tomcat.keystore  /usr/local/tomcat/conf/nisee_tomcat.keystore
+
+cp /home/gabrielvargas7/nisee_tomcat.csr  /usr/local/tomcat/conf/nisee_tomcat.csr
+
+cp /home/gabrielvargas7/nisee_berkeley_edu.cer  /usr/local/tomcat/conf/certificates/nisee_berkeley_edu.cer
+
+
+3.- import the certificates
+
+---import the root cert 
+---keytool -import -alias root -keystore [path/to/your/keystore] -trustcacerts -file [path/to/the/root_certificate] 
+   keytool -import -alias root -keystore /usr/local/tomcat/conf/nisee_tomcat.keystore -trustcacerts -file /usr/local/tomcat/conf/certificates/nisee_berkeley_edu.cer
+   keytool -import -alias tomcat -keystore /usr/local/tomcat/conf/nisee_tomcat.keystore -trustcacerts -file /usr/local/tomcat/conf/certificates/nisee_berkeley_edu.cer
+
+   keytool -import -alias mykey -keystore /usr/local/tomcat/conf/nisee_tomcat.keystore -trustcacerts -file /usr/local/tomcat/conf/certificates/nisee_berkeley_edu.cer
+
+   keytool -import -trustcacerts -alias server -file your_site_name.p7b -keystore your_site_name.jks
+
+---import the cert
+---keytool -import -alias [youralias] -keystore [path/to/your/keystore] -file [path/to/your_keystore] 
+
+keytool -import -alias mykey -keystore /usr/local/tomcat/conf/nisee_tomcat.keystore -file /usr/local/tomcat/conf/nisee_tomcat.csr
+ 
+
+///--- default alias
+-alias "mykey"
+
+
+/// show alias from keystore file 
+keytool -list -keystore nisee_tomcat.keystore 
+
+<!-- GV 02-17-2015
+    ########
+     GUIDE HOW UPDATE CERT 
+	########
+	0.- backup the old cert 
+	mv  /usr/local/tomcat/conf/nisee_tomcat.keystore /usr/local/tomcat/conf/nisee_tomcat.keystore_mmddyyyy
+	mv  /usr/local/tomcat/conf/certificates/nisee_berkeley_edu.cer /usr/local/tomcat/conf/certificates/nisee_berkeley_edu.cer_mmddyyyy
+
+   	NOTE: alias and password are very important (default alias ==> mykey) 
+
+  	1.- create the keystore file and type all the info, the name should be the domain name 
+
+  		keytool -genkey -alias mykey -keyalg RSA -keysize 2048 -keystore nisee_tomcat.keystore
+
+  		---output look like  
+        #########
+        	Country Name (2 letter code) [AU]:US
+			State or Province Name (full name) [Some-State]:CA
+			Locality Name (eg, city) []:Berkeley
+			Organization Name (eg, company) [Internet Widgits Pty Ltd]:UC Berkeley
+			Organizational Unit Name (eg, section) []:Pacific Earthquake Engineering Research Center
+			Common Name (e.g. server FQDN or YOUR name) []:nisee.berkeley.edu
+        #########
+
+  	2.- create the csr file  
+
+		keytool -certreq -keyalg RSA -file nisee_tomcat.csr -keystore nisee_tomcat.keystore
+
+	3.- send to the main campus, they should create a cert on InCommon SSL certificate, 
+	
+	4.- they will send you a bunch of dif cert files, for us, we are going to use  (as X509, Base64 encoded)
+
+	5.- copy the file to the server /usr/local/tomcat/conf/certificates/nisee_berkeley_edu.cer
+
+	6.- import the new cert to the keystore 
+
+   		keytool -import -alias mykey -keystore /usr/local/tomcat/conf/nisee_tomcat.keystore -trustcacerts -file /usr/local/tomcat/conf/certificates/nisee_berkeley_edu.cer
+
+    6.5.- check alias on the file 
+
+         keytool -list -keystore nisee_tomcat.keystore 
+
+    7 .- on server.xml, check the values are correct
+    	keyAlias="mykey" 
+    	keystoreFile="/usr/local/tomcat/conf/nisee_tomcat.keystore"
+    	keystorePass="tomkey"
+
+
+    8 restart the tomcat
+
+		service tomcat restart
+
+	9. error or problem, 	check the log file 
+
+		cat /usr/local/tomcat/logs/catalina.out
+
+-->
+
+
+
+
+**********************
+nisse application   
+**********************
+
+nisee app:  /usr/local/tomcat/webapps/elibrary/
+
+
+# config.action_mailer.default_url_options = { :host => 'localhost:3000'}
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #     :address              => "smtp.gmail.com",
+  #     :port                 => 587,
+  #     :domain               => "nisee.berkeley.edu",
+  #     :user_name            => "niseelibrary@gmail.com",
+  #     :password             => "LongBeach1933",
+  #     :authentication       => 'plain',
+  #     :enable_starttls_auto => true
+  # }
+  # config.action_mailer.perform_deliveries = true
+  # config.action_mailer.raise_delivery_errors = true
+  # 
+
+
+
+  <init-param>
+          <param-name>reset-msg</param-name>
+          <param-value>Here is the membership information you requested for The Earthquake Engineering Online Archive at http://nisee.berkeley.edu/elibrary/. </param-value>
+      </init-param>
+      <init-param>
+          <param-name>assist-msg</param-name>
+          <param-value>If you need additional assistance please contact the EERC Library by email (eerclibrary@berkeley.edu) or phone (510-665-3419). </param-value>
+      </init-param>
+      <init-param>
+          <param-name>mail-host</param-name>
+          <param-value>smtp.gmail.com</param-value>
+      </init-param>
+      <init-param>
+          <param-name>mail-user</param-name>
+          <param-value>niseelibrary</param-value>
+      </init-param>
+      <init-param>
+          <param-name>mail-pass</param-name>
+          <param-value>n2319403</param-value>
+          <param-value>LongBeach1933</param-value>
+          LongBeach1933
+      </init-param>
+      <init-param>
+          <param-name>mail-from</param-name>
+          <param-value>niseelibrary@gmail.com</param-value>
+      </init-param>
+
+
+       <param-name>mail-host</param-name>
+          <param-value>smtp.gmail.com</param-value>
+       <!--   <param-value>calmail.berkeley.edu</param-value> -->
+      </init-param>
+      <init-param>
+          <param-name>mail-user</param-name>
+          <param-value>niseelibrary</param-value>
+    <!--  <param-value>eerclibrary</param-value> -->
+      </init-param>
+      <init-param>
+          <param-name>mail-pass</param-name>
+          <param-value>LongBeach1933</param-value>
+        <!--  <param-value>n2319403</param-value> -->
+        </init-param>
+      <init-param>
+          <param-name>mail-from</param-name>
+          <param-value>niseelibrary@gmail.com</param-value>
+      <!--    <param-value>eerclibrary@berkeley.edu</param-value> -->
+      </init-param>
+    </servlet>
+
+
+>
+edu.berkeley.nisee.nbs.MemberSetup
+
+
+
+
+
+scp -r root@nisee.berkeley.edu:/home/jamescway/ /Users/gabrielvargas7/Documents/nisee/jamescway/
+
+
+scp -r root@nisee.berkeley.edu:/usr/local/tomcat/webapps/ /Users/gabrielvargas7/Documents/backup_nisee/gv_original
+
+scp -r root@nisee.berkeley.edu:/home/nisee/public_html /Users/gabrielvargas7/Documents/backup_nisee/gv_original/home/nisee/public_html
+
+
+
+
+scp -r root@nisee.berkeley.edu:/usr/local/tomcat/webapps/elibrary /Users/gabrielvargas7/Documents/nisee/elibrary_original
+
+****************
+copy databases to local
+*********
+
+mysqldump -u root -p --databases elibrary  > 10_15_2015_elibrary.sql
+mysqldump -u root -p --databases adb  > 10_15_2015_adb.sql
+mysqldump -u root -p --databases nbs > 10_15_2015_nbs.sql
+
+
+
+scp -r gabrielvargas7@nisee.berkeley.edu:/home/gabrielvargas7/10_15_2015_elibrary.sql /Users/gabrielvargas7/Documents/backup_nisee/10_15_2015_elibrary.sql
+scp -r gabrielvargas7@nisee.berkeley.edu:/home/gabrielvargas7/10_15_2015_adb.sql /Users/gabrielvargas7/Documents/backup_nisee/10_15_2015_adb.sql
+scp -r gabrielvargas7@nisee.berkeley.edu:/home/gabrielvargas7/10_15_2015_nbs.sql /Users/gabrielvargas7/Documents/backup_nisee/10_15_2015_nbs.sql
+
+
+
+
+mysql -u root -p  -h localhost elibrary < 10_15_2015_elibrary.sql
+mysql -u root -p  -h localhost adb < 10_15_2015_adb.sql
+mysql -u root -p  -h localhost nbs < 10_15_2015_nbs.sql
+
+
+
+
+
+
+
+*******
+find . -type f -name "*.txt"
+
+find . -type f -name "Custom*.java"
+
+find . -type f -name "UserDAO*.java"
+
+find . -type f -name "elibrary.css"
+
+find . -type f -name "header_eerc1.gif"
+
+find . -type f -name "*log.*"
+
+niseeReader
+
+find . -type f -name "*niseeReader*.*"
+
+find . -type f -name "mlogin.*"
+
+find . -type f -name "CustomAnalyzer.java"
+
+find . -type f -name "AuditTrail.java"
+
+find . -type f -name "DataException.java"
+
+find / -name "cookbook"
+DataException
+
+
+
+
+<servlet-mapping>
+      <servlet-name>Browse</servlet-name>
+      <url-pattern>/author/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+      <servlet-name>Browse</servlet-name>
+      <url-pattern>/earthquake/*</url-pattern>
+  </servlet-mapping>
+    
+    <!-- Browse servlets -->
+    <servlet>
+      <servlet-name>Browse</servlet-name>
+      <description>
+         Browse controlled terminology, return list with number of items.
+      </description>
+      <servlet-class>edu.berkeley.nisee.search.Browse</servlet-class>
+      <init-param>
+         <param-name>google_ads</param-name>
+         <param-value>show</param-value>
+      </init-param>
+    </servlet>
+
+
+http://nisee.berkeley.edu/documents/elib/www/documents/LIQF/yoshida-limon-costa-rica.pdf
+
+yoshida-limon-costa-rica.pdf
+
+find . -type f -name "yoshida-limon-costa-rica.pdf"
+
+find . -type f -name  "opensees_80-error_log*"
+*********************
+indexing 
+********************
+/home/cdjames/cvs/elibrary/source/indexes/build_indexes.csh
+
+
+
+ /Users/gabrielvargas7/Documents/nisee_app/WebApplication1/dist/WebApplication1.war
+

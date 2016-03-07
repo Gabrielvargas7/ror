@@ -1,0 +1,213 @@
+hepper_apache  Server version: Apache/2.2.3
+
+******************
+location
+******************
+
+cd /etc/httpd/conf/httpd.conf
+
+
+--- spo configuration 
+cat /etc/httpd/conf/extra/httpd-peer-site.conf
+
+--- new server 
+sudoedit /etc/httpd/peer.d/httpd-peer-site.conf
+sudoedit /etc/httpd/peer.d/httpd-cosmos-site.conf
+sudoedit /etc/httpd/peer.d/httpd-ngawest2-site.conf
+sudoedit /etc/httpd/peer.d/httpd-openfresco-site.conf
+
+sudoedit /etc/httpd/peer.d/httpd-northridge20.conf 
+
+sudoedit /etc/httpd/conf.d/passenger.conf
+
+
+************ staging server ********************
+vim /etc/httpd/conf/extra/httpd-peer-site.conf
+
+
+-- 
+cat /etc/httpd/conf/httpd.conf
+
+
+
+--- restart the server
+ /sbin/service httpd restart
+
+ ---new server 
+ sudo /sbin/service httpd restart
+
+
+--- test before restart
+/usr/sbin/apachectl configtest 
+
+/usr/sbin/httpd -V
+
+-- apache error log
+cat /var/log/httpd/error_log
+cat /var/log/httpd/passenger.log
+
+-- set selinux to 0 
+echo 0 > /selinux/enforce
+cat /selinux/enforce
+
+-- set commands 
+/usr/sbin/semodule -l
+/usr/sbin/setenforce 0
+
+
+*****************
+// set app to selinux ( passenager)
+*****************
+
+--- set passenger wit selinux, run with root
+1. /usr/sbin/setenforce 0
+2. /sbin/service httpd restart
+3. run the project for sometime so that audit has enough data ...
+4. grep httpd /var/log/audit/audit.log | audit2allow -M passenger
+5. /usr/sbin/semodule -i passenger.pp
+6. /usr/sbin/semodule -l
+7. /usr/sbin/setenforce 1
+8. cat /selinux/enforce  --> ## should show 1
+9. /sbin/service httpd restart
+
+
+
+
+/// password authentication
+
+/usr/local/apache/passwords/http_passwd
+
+
+************
+ chagen permitions
+************
+
+
+chown -R apache:apache tmp
+
+chown -R apache:rvm rdgml_passenger
+chown -R apache:rvm maintenance_page
+
+chown -R fmckenna:webmaster image
+
+
+----get in to the folder pedms1 and the run
+
+find . -type f -exec chmod 664 {} \;
+find . -type d -exec chmod 775 {} \;
+
+
+chown -R apache:apache NGAWest2
+
+chmod 777 cache
+
+*****************
+// restart the application
+*****************
+
+touch /var/www/html/helloapp/tmp/restart.txt
+
+
+
+	Alias /helloapp "/var/www/html/helloapp1/public"
+	<Location /helloapp>
+        	PassengerBaseURI /helloapp1
+	        PassengerAppRoot /var/www/html/helloapp1
+    		PassengerRuby /usr/local/rvm/gems/ruby-1.9.3-p551/wrappers/ruby
+	</Location>
+
+	<Directory /var/www/html/helloapp1/public> 
+                # This relaxes Apache security settings. 
+               AllowOverride all 
+                # MultiViews must be turned off. 
+               Options -MultiViews 
+        
+
+	</Directory> 
+
+mv /var/www/html/spo/shared/config /home/deployer/ 
+
+mv /home/deployer/config/  /var/www/html/spo/shared/ 
+
+#################
+Memory use by apache 
+################
+watch -n 1 "echo -n 'Apache Processes: ' && ps -C apache2 --no-headers | wc -l && free -m"
+
+-- to see memory use
+free -ml
+-- run every two seconds 
+---   the line with the 1 under si). The ‘si’ and ‘so’ columns are swap-in and swap-out, respectively, and show writes and reads to swap.
+vmstat 2
+
+
+-------
+http://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us2000263s&format=geojson
+
+	M 5.2 - 143km E of Yamada, Japan	5.2	2015-04-15T19:55:00.000Z		143km E of
+
+
+
+**************************
+**************************
+new server
+**************************
+**************************
+
+
+sudoedit /etc/httpd/peer.d/httpd-autoindex.conf
+sudoedit /etc/httpd/peer.d/httpd-peer-site.conf
+sudoedit /etc/httpd/peer.d/httpd-cosmos-site.conf
+
+sudoedit /etc/httpd/peer.d/httpd-ngawest2-site.conf 
+sudoedit /etc/httpd/peer.d/httpd-northridge20.conf 
+sudoedit /etc/httpd/peer.d/httpd-openfresco-site.conf
+sudoedit /etc/httpd/peer.d/httpd-opensees-site.conf
+
+sudoedit /etc/httpd/peer.d/httpd-openseesnavigator-site.conf
+
+
+
+sudoedit /etc/httpd/conf.d/passenger.conf
+
+sudoedit /etc/httpd/conf/httpd.conf
+
+
+
+peer-prod-01.cosmos-eq.org
+peer-prod-01.northridge20.org
+
+
+peer-prod-01.ngawest2.berkeley.edu
+peer-prod-01.openfresco.berkeley.edu
+peer-prod-01.opensees.berkeley.edu
+
+
+**********
+logs 
+*********
+cat  /usr/local/apache/logs/opensees_navigator_80-access_log
+cat  /usr/local/apache/logs/opensees_navigator_80-error_log
+
+
+
+ /usr/local/apache/passwords/http_passwd
+ /home/app_peer/.http_passwd/http_passwd
+
+du -sch  andyesp ce227 cosmos1301 deployer drivers   gabrielvargas7  heidi lost+found MegaSAS.log mstavrop russell silvia takhirov vrodriguez which yousef aschell dhaimade ekohama g.kang	
+
+du -sch jamescway  lucynguyen  mgebman	nate	    sakai		  slc	    tkishida  wdn woody  zlara bartling  clairejohnson dam donp	elwood goulet	  janine     mahin	   moehle	peer-lidar 
+
+du -sch  sezen staff tomcat weezers yang bridgepbee  clement darlene dpimentel fmckenna  hachem jose marcos mosalam	robert shared_peerworkspace  sysadmin  t_tomoyo  west	  yos
+
+
+mv /www/peer3/rails_apps/html/spo_passenger /www/peer3/rails_apps/html/spo_passenger_1
+
+
+cp /www/peer3/rails_apps/html/spo_passenger_1/shared/config/database.yml /www/peer3/rails_apps/html/spo_passenger/shared/config/database.yml
+
+cp /www/peer3/rails_apps/html/spo_passenger_1/shared/config/application.yml /www/peer3/rails_apps/html/spo_passenger/shared/config/application.yml
+
+cp /www/peer3/rails_apps/html/spo_passenger_1/shared/config/environments/production.rb /www/peer3/rails_apps/html/spo_passenger/shared/config/environments/production.rb
+
+maintenance_page

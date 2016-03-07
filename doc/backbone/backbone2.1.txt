@@ -1,0 +1,33 @@
+backbone2.1.txt
+
+--- pass the el element to the model
+
+appointmentsView({collection: appointments, el: $('#app')});
+
+
+
+
+-- pass additional values
+
+var todoView =  new TodoView({model,todoItem,user:currentUser});
+
+-- access it 
+todoView.options ---> {"user":currentUser}
+
+var TodoView = Backbone.View.extend({
+	initialize:function(options){
+		this.user = options.user;
+	}
+})
+
+
+
+--- backbone 2.5
+
+
+
+
+
+
+
+  

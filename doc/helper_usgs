@@ -1,0 +1,22 @@
+helper_usgs
+
+http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&productcode=ci11408890
+
+
+{
+....	
+	download_files[{
+		name:"Instrumental intensity scale"
+		link: "http://earthquake.usgs.gov/archive/product/shakemap/atlas19940117123055/atlas/1423011201411/download/polygons_mi.kmz"
+	},
+	{
+		name:"Instrumental intensity scale"
+		link: "http://earthquake.usgs.gov/archive/product/shakemap/atlas19940117123055/atlas/1423011201411/download/polygons_mi.kmz"
+	}]
+}
+
+
+**********************
+**********************
+
+http://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us20002926&format=geojson

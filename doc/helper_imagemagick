@@ -1,0 +1,17 @@
+imagemagick
+
+#######
+check version
+######
+
+ identify -version
+
+#######
+test imagemagick 
+######
+
+$ convert logo: logo.gif
+$ identify logo.gif
+$ display logo.gif
+
+

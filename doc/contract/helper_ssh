@@ -1,0 +1,23 @@
+
+**********
+add your key to a remove server
+**********
+me@localhost $ ssh root@remote
+root@remote $ su - deploy
+deploy@remote $ cd ~
+deploy@remote $ mkdir .ssh
+deploy@remote $ echo "ssh-rsa jccXJ/JRfGxnkh/8iL........dbfCH/9cDiKa0Dw8XGAo01mU/w== /Users/me/.ssh/id_rsa" >> .ssh/authorized_keys
+deploy@remote $ chmod 700 .ssh
+deploy@remote $ chmod 600 .ssh/authorized_keys
+
+
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGyzSAcLk8vhyKuqbCsr2BPYiGPlotMAooLXaRXv6SN4xQuEGcTnh0druU5TNbYb+E+zC58X+MfobzIUJ0MBiXnIyfZT4kAqKLpBDBdbZIkxv6AvwuzWz9LK7OdurYPCIcmsnXBbcROxoakxzVyWY7LZ2DxBNjtY6NWQGK8LuPKzzI4qN5BD3SMb+bMQnvQjsDYgvmaFgU51EtTmFyCZc08ux0SqOUJ0j7oNiy7+WOikuSG9DeHq5MtKi5Gqov+RFIQHjNFpCcU+5xnfkN8/2YOTrQvpRmXzuWISnntv47TfgGgemEs2az3tWHYbDfI2g6946UwV7ljl2VqTWkVlDb /Users/gabrielvargas7/.ssh/id_rsa" >> .ssh/authorized_keys
+
+
+
+ssh -i "chef-key-pair-uswest2.pem" ec2-user@ec2-52-37-170-244.us-west-2.compute.amazonaws.com 'hostname; uptime' 
+
+****************
+test connection with github
+****************
+ ssh -i "chef-key-pair-uswest2.pem" ec2-user@ec2-52-37-170-244.us-west-2.compute.amazonaws.com 'git ls-remote git@github.com:Gabrielvargas7/WebApplication1.git'

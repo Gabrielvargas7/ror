@@ -1,0 +1,24 @@
+// controller  ->  UsersThemesController
+// method type ->  put
+// method name ->  json_update_user_theme_by_user_id
+
+// Security: private user
+
+//Description
+
+
+//           PUT change the user's theme by user id
+
+//           users_themes/json/update_user_theme_by_user_id_and_section_id/:user_id/:section_id'
+//           users_themes/json/update_user_theme_by_user_id_and_section_id/1/1.json
+//           Form Parameters:
+//#                  new_theme_id = 1
+// Return ->
+// Success    ->  head  200 OK
+
+
+// back_end   :done
+// front_end :working
+
+
+{"created_at":"2013-06-13T17:33:56Z","id":29,"section_id":1,"theme_id":4,"updated_at":"2013-06-13T19:04:00Z","user_id":23}

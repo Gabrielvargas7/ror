@@ -1,0 +1,465 @@
+helper_wordpress
+
+*********
+scp -r  /Users/gabrielvargas7/Downloads/wordpress-4.2.3.zip  gabrielvargas7@peer.berkeley.edu:/home/gabrielvargas7/wordpress-4.2.3.zip 
+
+cp -r /home/gabrielvargas7/wordpress  /var/www/wwwroot/peer3/wordpress_test
+
+CREATE DATABASE wordpress_test;
+
+chown -R app_peer:webmaster wordpress_test
+
+find . -type f -exec chmod 664 {} \;
+find . -type d -exec chmod 775 {} \;
+
+
+chown -R app_peer:webmaster openseesnavigator
+chown -R app_peer:webmaster openfresco
+
+
+chown -R app_peer:webmaster news
+chown -R app_peer:webmaster events
+chown -R app_peer:webmaster upload
+
+
+find . -type f -exec chmod 664 {} \;
+find . -type d -exec chmod 775 {} \;
+
+
+chown -R app_peer:webmaster events
+
+**************
+chagen permitions on staging server
+**************
+
+chown -R apache:www news
+chown -R apache:www events
+
+find . -type f -exec chmod 664 {} \;
+find . -type d -exec chmod 775 {} \;
+
+
+
+*************************
+Upgrade wordpress 
+*************************
+
+/news
+/events/ 
+/tbi
+/transportation
+/lifelines
+/tsunami
+/ngawest2
+/ngaeast
+/globalgmpe
+
+
+3.5 to 3.7
+3.7 to 3.9
+3.9 to 4.1 and then finally 4.3.1
+
+
+************************
+************************ Upgrade WP
+************************
+
+Backup database. 
+
+1.- mysqldump -u root -p --databases tbi >  tbi_02_24_2016.sql
+2.- cp -r /www/peer3/tbi  /home/gabrielvargas7/backup_wp/tbi/wp/
+3.- deactivate pluginds (feedburner, google analytis)
+4.- on the server folders 
+    wp-admin 
+    wp-includes
+    rm -rf wp-includes
+    rm -rf wp-admin
+5.- on the new version wp delete folder
+    wp-content
+
+6.- copy all files from new version wp to the server 
+
+7.- click refresh and click upgrade    
+
+********************
+Restore database 
+********************
+
+
+
+
+
+
+
+************************
+************************
+************************
+
+
+
+
+
+*************** Change the URL
+
+select * from wp_options where option_name = 'siteurl';
+select * from wp_options where option_name = 'home'; 
+
+*** sites events 
+UPDATE  wp_options SET option_value = 'http://peera.berkeley.edu/events'  where option_name = 'siteurl';
+UPDATE  wp_options SET option_value = 'http://peera.berkeley.edu/events'  where option_name = 'home';
+ 
+
+****** News
+UPDATE  wp_options SET option_value = 'http://peera.berkeley.edu/news'  where option_name = 'home';
+UPDATE  wp_options SET option_value = 'http://peera.berkeley.edu/news'  where option_name = 'siteurl';
+
+**** OpenSeesNavigator
+UPDATE  wp_options SET option_value = 'http://peera.berkeley.edu/openseesnavigator'  where option_name = 'home';
+UPDATE  wp_options SET option_value = 'http://peera.berkeley.edu/openseesnavigator'  where option_name = 'siteurl';
+
+
+**** Openfresco
+UPDATE  wp_options SET option_value = 'http://peera.berkeley.edu/openfresco'  where option_name = 'home';
+UPDATE  wp_options SET option_value = 'http://peera.berkeley.edu/openfresco'  where option_name = 'siteurl';
+
+**** tbi
+UPDATE  wp_options SET option_value = 'http://peera.berkeley.edu/tbi'  where option_name = 'home';
+UPDATE  wp_options SET option_value = 'http://peera.berkeley.edu/tbi'  where option_name = 'siteurl';
+
+
+
+****************** insert admin user on WP
+
+
+INSERT INTO `databasename`.`wp_users` (`ID`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `display_name`) VALUES ('4', 'demo', MD5('demo'), 'Your Name', 'test@yourdomain.com', 'http://www.test.com/', '2011-06-07 00:00:00', '', '0', 'Your Name');
+ 
+
+INSERT INTO `databasename`.`wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALUES (NULL, '4', 'wp_capabilities', 'a:1:{s:13:"administrator";s:1:"1";}');
+
+INSERT INTO `databasename`.`wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALUES (NULL, '4', 'wp_user_level', '10');
+
+**********************
+
+
+****************** insert admin user on WP NEWS
+
+INSERT INTO `news`.`wp_users` (`ID`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `display_name`) VALUES ('8', 'gabriel', MD5('PEERCenter!'), 'gabriel', 'gabrielvargas7@berkeley.edu', 'http://www.test.com/', '2015-10-05 00:00:00', '', '0', 'gabriel');
+ 
+
+INSERT INTO `news`.`wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALUES (NULL, '8', 'wp_capabilities', 'a:1:{s:13:"administrator";s:1:"1";}');
+
+INSERT INTO `news`.`wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALUES (NULL, '8', 'wp_user_level', '10');
+
+select * from news.wp_usermeta where user_id=8;
+
+************************
+
+
+****************** insert admin user on WP EVENTS
+
+INSERT INTO `events`.`wp_users` (`ID`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `display_name`) VALUES ('7', 'gabriel', MD5('PEERCenter!'), 'gabriel', 'gabrielvargas7@berkeley.edu', 'http://www.test.com/', '2015-10-05 00:00:00', '', '0', 'gabriel');
+ 
+
+INSERT INTO `events`.`wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALUES (NULL, '7', 'wp_capabilities', 'a:1:{s:13:"administrator";s:1:"1";}');
+
+INSERT INTO `events`.`wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALUES (NULL, '7', 'wp_user_level', '10');
+
+select * from events.wp_usermeta where user_id=7;
+
+************************
+
+
+****************** insert admin user on WP OPENSEESNAVIGATOR
+
+INSERT INTO `openseesnavigator`.`wp_users` (`ID`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `display_name`) VALUES ('435', 'gabrielvargas7', MD5('PEERCenter!_22'), 'gabrielvargas7', 'gabrielvargas7@berkeley.edu', 'http://www.test.com/', '2015-10-05 00:00:00', '', '0', 'gabrielvargas7');
+ 
+
+INSERT INTO `openseesnavigator`.`wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALUES (NULL, '435', 'wp_capabilities', 'a:1:{s:13:"administrator";s:1:"1";}');
+
+INSERT INTO `openseesnavigator`.`wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALUES (NULL, '435', 'wp_user_level', '10');
+
+select * from openseesnavigator.wp_usermeta where user_id=435;
+select * from openseesnavigator.wp_users; 
+
+************************
+
+
+****************** insert admin user on WP OpenFresco
+
+INSERT INTO `openfresco`.`wp_users` (`ID`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `display_name`) VALUES ('457', 'gabrielvargas7', MD5('PEERCenter!_22'), 'gabrielvargas7', 'gabrielvargas7@berkeley.edu', 'http://www.test.com/', '2015-10-05 00:00:00', '', '0', 'gabrielvargas7');
+ 
+
+INSERT INTO `openfresco`.`wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALUES (NULL, '457', 'wp_capabilities', 'a:1:{s:13:"administrator";s:1:"1";}');
+
+INSERT INTO `openfresco`.`wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALUES (NULL, '457', 'wp_user_level', '10');
+
+select * from openfresco.wp_usermeta where user_id=457;
+
+select * from openfresco.wp_users; 
+
+************************
+
+
+****************** insert admin user on WP TBI
+
+INSERT INTO `tbi`.`wp_users` (`ID`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `display_name`) VALUES ('8', 'gabriel', MD5('PEERCenter!_22'), 'gabriel', 'gabrielvargas7@berkeley.edu', 'http://www.test.com/', '2015-10-05 00:00:00', '', '0', 'gabriel');
+ 
+
+INSERT INTO `tbi`.`wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALUES (NULL, '8', 'wp_capabilities', 'a:1:{s:13:"administrator";s:1:"1";}');
+
+INSERT INTO `tbi`.`wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALUES (NULL, '8', 'wp_user_level', '10');
+
+select * from tbi.wp_usermeta where user_id=8;
+
+
+select * from `tbi`.`wp_users`; 
+
+************************
+
+
+
+*****************
+Plugin Feedburner Sink
+******************
+
+http://www.feedburner.com/fb/a/ping
+
+http://feeds.feedburner.com/PeerNews
+
+feedburner.google.com/fb/a/feedintro
+
+https://feedburner.google.com/fb/a/optimize?id=poo3ft4nqptqd61am3ivi71pm0
+
+**************
+rename files. 
+**************
+
+mv  index.php  index_10_28_2015_1.php 
+
+mv  index_10_28_2015.php index.php
+
+
+
+*****************
+wordpress list
+*****************
+
+http://peer.berkeley.edu/bridgepbee/
+
+./upload/wp-login.php
+./graceK/wp-login.php
+./NGL/wp-login.php
+./geoengineering_lecture_2011/wp-login.php
+./wordpress_test/wp-login.php
+./peer_ground_motion_feedback/wp-login.php
+
+./openfrescoBAD/wp-login.php
+./junk/news-wp/wp-login.php
+./wp-peer/upload/wp-login.php
+./wp-peer/annual_meeting/wp-login.php
+./wp-peer/testo2/wp-login.php
+./wp-peer/template/annual_meeting/wp-login.php
+./wp-peer/template/wordpress/wp-login.php
+./wp-peer/template/yousef/wp-login.php
+./wp-peer/template/testo3/wp-login.php
+./wp-peer/wordpress_test/wp-login.php
+./wp-peer/tbi/wp-login.php
+./wp-peer/transportation/wp-login.php
+./wp-peer/wordpress/wp-login.php
+./wp-peer/peercontent/wp-login.php
+./wp-peer/lifelines/wp-login.php
+./wp-peer/ngaeast/wp-login.php
+./wp-peer/tsunami/wp-login.php
+./wp-peer/testo/wp-login.php
+./wp-peer/globalgmpe/wp-login.php
+./wp-peer/ngawest2_wg/wp-login.php
+./wp-peer/junk/ngaeast_wg2/wp-login.php
+./wp-peer/junk/ngaeast_wg/wp-login.php
+./wp-peer/ngawest2/wp-login.php
+./wp-peer/ngaeast_wg/wp-login.php
+./wp-peer/grandchallenge/wp-login.php
+./wp-peer/prediction_contest_2011/wp-login.php
+./wp-peer/prediction_contest/wp-login.php
+
+
+
+
+
+mv -v /www/peer3/upload/ /home/gabrielvargas7/wordpress_backup/upload/
+mv -v /www/peer3/graceK/ /home/gabrielvargas7/wordpress_backup/graceK/
+mv -v /www/peer3/NGL/ /home/gabrielvargas7/wordpress_backup/NGL/
+mv -v /www/peer3/ngasub/ /home/gabrielvargas7/wordpress_backup/ngasub/
+mv -v /home/gabrielvargas7/wordpress_backup/ngasub/ /www/peer3/ngasub/
+mv -v /www/peer3/wordpress_test/ /home/gabrielvargas7/wordpress_backup/wordpress_test/
+mv -v /www/peer3/globalgmpe_wg/ /home/gabrielvargas7/wordpress_backup/globalgmpe_wg/
+mv -v /www/peer3/openfrescoBAD/ /home/gabrielvargas7/wordpress_backup/openfrescoBAD/
+mv -v /www/peer3/wp-peer/ /home/gabrielvargas7/wordpress_backup/wp-peer/
+mv -v /www/peer3/globalgmpe_wg/ /home/gabrielvargas7/wordpress_backup/globalgmpe_wg/
+mv -v /www/peer3/peer_ground_motion_feedback/ /home/gabrielvargas7/wordpress_backup/peer_ground_motion_feedback/
+
+mv -v  /www/peer3/events/2013/nees-edefense/ /home/gabrielvargas7/wordpress_backup/nees-edefense/
+mv -v  /home/gabrielvargas7/wordpress_backup/nees-edefense/ /www/peer3/events/2013/nees-edefense/ 
+
+
+
+
+
+-- backtoserver
+mv -v /home/gabrielvargas7/wordpress_backup/globalgmpe_wg/ /www/peer3/globalgmpe_wg/
+mv -v /www/peer3/geoengineering_lecture_2011/ /home/gabrielvargas7/wordpress_backup/geoengineering_lecture_2011/
+
+
+
+mv -v /www/peer3/nuclear_1234/ /home/gabrielvargas7/wordpress_backup/nuclear_wg/
+
+
+---- 
+./news/wp-login.php  
+./tbi/wp-login.php
+./transportation/wp-login.php
+./openseesnavigator/wp-login.php
+./yousef/wp-login.php
+./lifelines/wp-login.php
+./openfresco/wp-login.php
+./ngaeast/wp-login.php
+./tsunami/wp-login.php
+./events/wp-login.php
+./events/annual_meeting/2013AM/wp-login.php
+./events/annual_meeting/2012AM/wp-login.php
+./events/annual_meeting/2011AM/wp-login.php
+./ngasub/wp-login.php
+./events/annual_meeting/2016AM/wp-login.php
+./globalgmpe_wg/wp-login.php
+./geoengineering_lecture_2012/wp-login.php
+./events/northridge/wp-login.php
+./events/loma_prieta/wp-login.php
+./globalgmpe/wp-login.php
+./ngawest2_wg/wp-login.php
+./UCPRForum/wp-login.php
+./ngawest2/wp-login.php
+./ngaeast_wg/wp-login.php
+./grandchallenge/wp-login.php
+./geoengineering_lecture/wp-login.php
+./nuclear_wg/wp-login.php
+./prediction_contest_2011/wp-login.php
+./gmsm/wp-login.php
+
+./bridgepbee/wp-login.php
+
+
+.
+
+key for opensees
+6LcVwRITAAAAAJ4vbxzp9oKTq_FrjXjJow1hAYC4
+6LcVwRITAAAAABiIKo_B8pVdeAHgS1ZDcDrv8iYb
+
+key for opennavigator
+6LcrrhITAAAAAArXfDIcVwgMcBXPCY5EqV8Wg1W7
+6LcrrhITAAAAAMExQz5jpkxvZBJ3wYC7gIvX0fUA
+
+************************
+************************ Upgrade WP
+************************
+
+Backup database. 
+
+1.- 
+ cp -r /www/peer3/bridgepbee/   /home/gabrielvargas7/wordpress_backup/wp_bridgepbee/wp3.5.1/
+2.- mysqldump -u root -p --databases bridgepbee_wordpress > wp3.5.1_bridgepbee_wordpress.sql
+3.- deactivate pluginds (feedburner, google analytis)
+4.- on the server folders 
+    wp-admin 
+    wp-includes
+    rm -rf wp-includes
+    rm -rf wp-admin
+5.- on the new version wp delete folder
+    wp-content
+
+6.- copy all files from new version wp to the server 
+
+7.- click refresh and click upgrade    
+
+8 chown  -R gabrielvargas7:webmaster bridgepbee_wordpress
+
+find . -type f -exec chmod 664 {} \;
+find . -type d -exec chmod 775 {} \;
+
+
+
+
+****************** insert admin user on WP tbi
+
+INSERT INTO `bridgepbee_wordpress`.`wp_users` (`ID`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `display_name`) VALUES ('1100', 'gabrielvargas7', MD5('PEERCenter!_22'), 'gabrielvargas7', 'gabrielvargas7@berkeley.edu', 'http://www.test.com/', '2015-10-05 00:00:00', '', '0', 'gabrielvargas7');
+ 
+
+INSERT INTO `bridgepbee_wordpress`.`wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALUES (NULL, '1100', 'wp_capabilities', 'a:1:{s:13:"administrator";s:1:"1";}');
+
+INSERT INTO `bridgepbee_wordpress`.`wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALUES (NULL, '1100', 'wp_user_level', '10');
+
+select * from bridgepbee_wordpress.wp_usermeta where user_id=1100;
+
+select * from bridgepbee_wordpress.wp_users; 
+
+
+
+
+*****************
+new wp
+*****************
+
+-- copy file to the server
+- copy to the specific location 
+cp -r  /home/gabrielvargas7/wordpress_copy/ /www/peer3/tbi-retrofit/ 
+
+
+-- create database with root user
+CREATE DATABASE tbi_retrofit;
+
+--- add the database information on wp-config.php 
+cp  wp-config-sample.php  wp-config.php 
+
+sudoedit /www/peer3/tbi-peer/wp-config.php
+
+/ ** MySQL settings - You can get this info from your web host ** //
+/** The name of the database for WordPress */
+define('DB_NAME', 'tbi');
+
+/** MySQL database username */
+define('DB_USER', 'root');
+
+/** MySQL database password */
+define('DB_PASSWORD', 'mypassword');
+
+/** MySQL hostname */
+define('DB_HOST', 'localhost');
+
+/** Database Charset to use in creating database tables. */
+define('DB_CHARSET', 'utf8');
+
+/** The Database Collate type. Don't change this if in doubt. */
+define('DB_COLLATE', '');
+
+/**#@+
+
+
+--- change permitions 
+
+chown -R apache:www tbi-peer
+
+
+find . -type f -exec chmod 664 {} \;
+find . -type d -exec chmod 775 {} \;
+
+
+------ copy themes 
+cp -r /www/peer3/tbi/wp-content/themes/peer_minisite/ /www/peer3/tbi-retrofit/wp-content/themes/peer_minisite/ 
+
+
+
+
+
+
+
+
+
+

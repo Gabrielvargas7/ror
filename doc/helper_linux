@@ -1,0 +1,252 @@
+helper_linux
+
+####
+	copy files over the network 
+####
+
+scp -r username@ipaddress:/path/of/folder/to/copy /target/local/directory
+
+scp -r gabrielvargas7@peer.berkeley.edu:/home/gabrielvargas7/pedms /Users/gabrielvargas7/Documents/code
+
+
+scp -r root@peer.berkeley.edu:/home/gabrielvargas7/mysql/mysqld1.log /Users/gabrielvargas7/Documents/mysqld1.log
+
+scp -r gabrielvargas7@nisee.berkeley.edu:/home/gabrielvargas7/server.csr /Users/gabrielvargas7/Documents/nisee
+
+
+scp -r peer.berkeley.edu:/home/gabrielvargas7/pedms1 /Users/gabrielvargas7/Documents/rails/pedms2
+
+-- copy mysql dump file 
+
+scp -r peer.berkeley.edu:/home/gabrielvargas7/dump.sql /Users/gabrielvargas7/Documents/rails
+
+
+scp -r peer.berkeley.edu:/home/gabrielvargas7/dump.sql /Users/gabrielvargas7/Documents/rails
+
+
+1-. copy the application from my computer to server /home/gabrielvargas7/last_pedms/ 
+
+scp -r  /Users/gabrielvargas7/Downloads/nisee_berkeley_edu.cer  gabrielvargas7@nisee.berkeley.edu:/home/gabrielvargas7/
+
+scp -r  gabrielvargas7@nisee.berkeley.edu:/home/gabrielvargas7/nisee_tomcat.csr /Users/gabrielvargas7/Documents/nisee/nisee_tomcat.csr
+
+scp -r  gabrielvargas7@nisee.berkeley.edu:/home/gabrielvargas7/09_11_2015_elibrary.sql /Users/gabrielvargas7/Documents/nisee/09_11_2015_elibrary.sql
+
+
+####
+	copy files to home 
+####
+
+cp -r /www/peer3/rails_apps/pedms/ /home/gabrielvargas7/pedms1
+
+cp -r /var/lib/tomcat/jaxrs_tutorial/current/build/web/. /var/lib/tomcat/webapps/WebApplication1
+
+
+
+########
+link a folder 
+######
+
+---ln -s path-to-actual-folder name-of-link
+ln -s /www/peer3/rails_apps/spo_plus/public/  spo_plus 
+
+---to confirm, do:
+
+---ls -ld name-of-link
+ls -ld spo_plus
+
+
+########
+bach files  
+######
+
+echo $PATH
+
+########
+edit bach files  on your home directory
+######
+
+cat .bash_profile
+
+
+// user new user to group  
+
+/usr/sbin/useradd -G rvm username
+
+/usr/sbin/useradd -G rvm deployer
+
+/usr/sbin/useradd -G spws ywest3
+
+/usr/sbin/useradd -G spws erikadonald 
+
+-- check groups of the user 
+groups <username>
+groups erikadonald
+
+
+**********
+passwd username
+**********
+
+passwd erikadonald
+
+
+
+/usr/sbin/useradd summary_project
+
+/// add user to a existing group 
+/usr/sbin/usermod -aG additional_groups username
+/usr/sbin/usermod -aG rvm deployer
+
+/usr/sbin/usermod  -aG summary_project zlara
+/usr/sbin/usermod  -aG summary_project darlene
+
+
+******* change group owner 
+
+chgrp group_name file/directory_name
+chgrp summary_project 'Summary & Project Details for STI.xls'
+
+
+/// show all groups
+getent group
+
+///delete a group
+groupdel /usr/sbin/deployers
+
+
+
+/// path 
+ echo $PATH
+
+/// add it to path
+export PATH=$PATH:/usr/sbin/
+
+/// test deploy 
+ssh -A deployer@library.peer.berkeley.edu 'git ls-remote git@github.com:Gabrielvargas7/helloapp3.git'
+
+ssh deployer@library.peer.berkeley.edu 'git ls-remote git@github.com:Gabrielvargas7/helloapp3.git'
+
+ssh -A deployer@peer.berkeley.edu 'git ls-remote git@github.com:Gabrielvargas7/helloapp3.git'
+
+ssh  deployer@peer.berkeley.edu 'git ls-remote git@github.com:Gabrielvargas7/helloapp3.git'
+
+ssh me@remote
+    me@remote $ [[ $- == *i* ]] && echo 'Interactive' || echo 'Not interactive'
+    Interactive
+    me@remote $ shopt -q login_shell && echo 'Login shell' || echo 'Not login shell'
+    Login shell
+
+
+me@localhost $ ssh me@remote "[[ $- == *i* ]] && echo 'Interactive' || echo 'Not interactive'"
+    Interactive
+    me@localhost $ ssh me@remote "shopt -q login_shell && echo 'Login shell' || echo 'Not login shell'"
+    Not login shell
+
+ echo ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGyzSAcLk8vhyKuqbCsr2BPYiGPlotMAooLXaRXv6SN4xQuEGcTnh0druU5TNbYb+E+zC58X+MfobzIUJ0MBiXnIyfZT4kAqKLpBDBdbZIkxv6AvwuzWz9LK7OdurYPCIcmsnXBbcROxoakxzVyWY7LZ2DxBNjtY6NWQGK8LuPKzzI4qN5BD3SMb+bMQnvQjsDYgvmaFgU51EtTmFyCZc08ux0SqOUJ0j7oNiy7+WOikuSG9DeHq5MtKi5Gqov+RFIQHjNFpCcU+5xnfkN8/2YOTrQvpRmXzuWISnntv47TfgGgemEs2az3tWHYbDfI2g6946UwV7ljl2VqTWkVlDb /Users/gabrielvargas7/.ssh/id_rsa>> .ssh/authorized_keys
+
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGyzSAcLk8vhyKuqbCsr2BPYiGPlotMAooLXaRXv6SN4xQuEGcTnh0druU5TNbYb+E+zC58X+MfobzIUJ0MBiXnIyfZT4kAqKLpBDBdbZIkxv6AvwuzWz9LK7OdurYPCIcmsnXBbcROxoakxzVyWY7LZ2DxBNjtY6NWQGK8LuPKzzI4qN5BD3SMb+bMQnvQjsDYgvmaFgU51EtTmFyCZc08ux0SqOUJ0j7oNiy7+WOikuSG9DeHq5MtKi5Gqov+RFIQHjNFpCcU+5xnfkN8/2YOTrQvpRmXzuWISnntv47TfgGgemEs2az3tWHYbDfI2g6946UwV7ljl2VqTWkVlDb /Users/gabrielvargas7/.ssh/id_rsa
+
+
+ssh deployer@library.peer.berkeley.edu 'hostname; uptime'
+
+ssh deployer@library.peer.berkeley.edu 'ls -lR /var/www/html/helloapp3'
+ssh deployer@peer.berkeley.edu 'ls -lR /www/peer3/rails_apps/html/helloapp3'
+
+
+
+
+
+
+ sudo ln -s /www/peer3/rails_apps/pedms/public /www/peer3/spo_old
+
+ sudo unlink public
+
+
+##############
+check what process are using cpu
+#############
+ ps -aux
+
+ ps aux | less
+
+
+#################
+Memory use by apache 
+################
+watch -n 1 "echo -n 'Apache Processes: ' && ps -C apache2 --no-headers | wc -l && free -m"
+
+-- to see memory use
+free -ml
+
+-- run every two seconds 
+---   the line with the 1 under si). The ‘si’ and ‘so’ columns are swap-in and swap-out, respectively, and show writes and reads to swap.
+vmstat 2
+
+#######
+get partision information
+#######
+
+-->  df   ---> size of the partition
+-->  du -s ---> size of the directory 
+-->  ls -sal
+
+##################
+Image magick
+##################
+
+ rpm -ivh ImageMagick-6.8.5-8.x86_64.rpm
+
+ wget https://googledrive.com/host/0B-jmeKdw5b8xNWtlVmV5YmlHWGM/ImageMagick-6.8.5-8.x86_64.rpm  --no-check-certificate
+
+
+
+wget https://googledrive.com/host/0B-jmeKdw5b8xNWtlVmV5YmlHWGM/OpenEXR-1.4.0a-5.el5.x86_64.rpm --no-check-certificate
+
+rpm -ivh OpenEXR-1.4.0a-5.el5.x86_64.rpm
+
+wget https://googledrive.com/host/0B-jmeKdw5b8xNWtlVmV5YmlHWGM/fftw3-3.2.2-3.el5.x86_64.rpm --no-check-certificate
+
+rpm -ivh fftw3-3.2.2-3.el5.x86_64.rpm
+
+wget https://googledrive.com/host/0B-jmeKdw5b8xNWtlVmV5YmlHWGM/libwebp4-0.3.0-31.2.x86_64.rpm --no-check-certificate
+
+rpm -ivh libwebp4-0.3.0-31.2.x86_64.rpm
+
+
+mv /www/peer3/rails_apps/rdgml_141022.zip /home/gabrielvargas7/backup_old/rdgml_141022.zip
+
+
+############
+delete files older than
+###########
+
+
+find /path/to/files/ -type f -mtime +7 -exec rm -rf {} \;
+
+find /archive/ngawest2_files/Utility/ -type f -mtime +7 -exec rm -rf {} \;
+
+
+peer_sysadmin@lists.berkeley.edu
+
+
+
+****************
+hd size 
+****************
+
+-->  df   ---> size of the partition
+-->  du -sh---> size of the directory recursively
+-->  ls -sal
+-->  du -sh *  ---> list all folder size 
+du -sh /path/to/directory
+
+du -sh /home/shared_peerworkspace/peer-spws
+
+**************
+get the path of the package
+**************
+which tomcat 
+/usr/sbin/tomcat
+
+

@@ -1,0 +1,107 @@
+backbone1.7.txt
+
+
+$('a.todo').click(function(e){
+	e.preventDefault();
+})
+
+
+var router = new Backbone.Router({
+	routes:{"todo":'index'},
+	index:function(){
+
+	}
+
+});
+
+
+var routes = Backbone.Router({
+	routes:{"todos/:id":'show'},
+
+	show:function(id){...}
+});
+
+
+router.navigate("todos/1",{trigger:true});
+
+
+backbone.history.start();
+router.navigate("todos/1")  -- #todos/1
+
+
+Backbone.history.start({pushState:true});
+
+router.navigate("todo/1") --> /todos/1
+
+
+
+var TodoRouter = Backbone.Router.extend({
+	router:{
+	    "":"index"
+		"todos/:id":'show'
+	},
+	index:function(){
+	   this.todoList.fetch();
+	},
+	show:function(id){
+		this.todoList.focusOnTodoItem(id);
+
+	},
+	initialize:function(options){
+		this.todoList = options.todoList;
+	}
+	
+});
+
+
+var todoList = new TodoList();
+var TodoApp = new TodoRouter({todoList:todoList});
+
+
+----- 
+
+var TodoApp = new (
+	Backbone.Router.extend({
+
+		routes:{
+			"":"index",
+			"todos/:id":"show"
+		},
+		initialize:function(){
+			this.todoList = new TodoList();
+			this.todosView = newTodoListView({collection:this.todoList});
+			$('#app'.append(this.todosView.el));
+		},
+
+		start:function(){
+			Backbone.history.start({pushState:true});
+		},
+		index:function(){
+			this.todoList.featch();
+		},
+		show:function(id){
+			this.todoList.focusOnTodoItem(id);
+		}	
+
+	}));
+
+$(function(){TodoApp.start()})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----

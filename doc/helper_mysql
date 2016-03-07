@@ -1,0 +1,185 @@
+#####
+Start mysql  Server version: 5.0.95 Source distribution  
+#####
+    --- mac 
+    $mysql.server restart
+
+
+    /etc/init.d/mysqld restart
+
+***** new server 
+    sudo /sbin/service mysqld restart
+
+sudo /sbin/service mysqld start --skip-grant-tables --skip-networking 
+
+
+### mysql files
+/var/lib/mysql
+
+#####
+Connect mysql
+#####
+
+    $mysql -uroot -p
+
+
+#####
+Create dump file mysql
+#####
+
+
+
+ mysqldump --databases db1 db2 > dump.sql
+
+ mysqldump --databases pedms_production > dump.sql
+
+ mysqldump -u root -p --databases rdgml_development > 05_08_2015_rdgml_dev_backup.sql
+
+
+ mysqldump -u root -p --databases elibrary  > 10_15_2015_elibrary.sql
+
+
+
+
+#####
+mysql log 
+#####
+ 
+-- copy mysql log to my folder  
+
+cp -r /var/log/mysqld.log  /home/gabrielvargas7/mysql/mysqld1.log
+
+
+SET PASSWORD FOR 'root'@'localhost' = PASSWORD('staging_2014_e');
+SET PASSWORD FOR 'root'@'127.0.0.1' = PASSWORD('staging_2014_e');
+
+/usr/bin/mysqladmin -u root password 'staging_2014_e'
+/usr/bin/mysqladmin -u root --password='staging_2014_e' -h localhost 'staging_2014_e'
+/usr/bin/mysqladmin -u root password 'staging_2014_e'
+/usr/bin/mysqladmin -u root -h library.peer.berkeley.edu password 'staging_2014_e'
+
+mv /var/mysql /var/mysql_old_backup
+
+DROP USER ''@'library.peer.berkeley.edu'
+
+
+check configuration 
+
+/etc/init.d/mysqld --help
+
+
+
+
+###############################
+Incrise the number of connection
+##########################
+-- show number of connection
+   show variables like 'max_connections';  
+
+###################
+###################
+
+SHOW PROCESSLIST;
+
+SHOW VARIABLES LIKE 'connect_timeout';
+
+SHOW VARIABLES LIKE 'wait_timeout';
+
+SHOW GLOBAL STATUS LIKE 'max_used_connections';
+SHOW GLOBAL STATUS LIKE 'max_connections';
+
+SHOW VARIABLES LIKE '%log%';
+
+show status like 'Conn%';
+
+show status like '%onn%';
+
+
+#################
+rdgml DB
+#################
+
+development:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  wait_timeout: 30
+  database: rdgml_development
+  pool: 5 
+  username: root
+  password: mypassword
+
+#################
+setup debug to find slow query 
+#################
+
+slow-query-log = 1
+slow-query-log-file = /var/log/mysql-slow.log
+long_query_time = 1
+log-queries-not-using-indexes
+
+// old servers < 5.1
+log_slow_queries=/var/log/mysql/slow-query.log
+long_query_time=1
+log_queries_not_using_indexes=YES
+ -- then run to test it =>  
+
+mysqldumpslow /var/log/mysql/slow-query.log
+mysqldumpslow -a -s r -t 5 /var/log/mysql/mysql-slow.log
+mysqldumpslow -a -s c -t 5 /var/log/mysql/mysql-slow.log
+
+
+************************
+************************
+table modificadas 
+************************
+
+ALTER TABLE rdgml_development.spectras MODIFY Id INT AUTO_INCREMENT
+
+ drop database rdgml_development;
+ create database rdgml_development;
+ source /home/gabrielvargas7/backup/rdgml/05_08_2015_rdgml_dev_backup.sql
+
+
+***********
+restore databases on local system
+***********
+
+mysql -u root -p  -h localhost rdgml_development < 05_08_2015_rdgml_dev_backup.sql
+mysql -u root -p  -h localhost elibrary < 10_15_2015_elibrary.sql
+
+mysql -u root -p  -h localhost openseesnavigator < wp4_3_1_openseesnavigator_10_12_2015.sql
+
+select post_author,post_date from wp_posts where post_date > "2015-12-08";
+select count(id) from wp_posts;
+
+delete from wp_posts where post_date > "2015-12-08";
+
+
+***************
+***************
+DELETE FROM `rdgml_development`.`spectras` WHERE id >0;
+DELETE FROM `rdgml_development`.`searches` WHERE id > 0;
+ALTER TABLE `rdgml_development`.`spectras` AUTO_INCREMENT = 1
+ALTER TABLE `rdgml_development`.`searches` AUTO_INCREMENT = 1;
+
+SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'rdgml_development' AND   TABLE_NAME   = 'spectras';
+
+
+*************
+run mysql file 
+*************
+scp -r /Users/gabrielvargas7/Documents/rdgml_files/sqlAddDataUpdated.sql peer-prod-01.ist.berkeley.edu:/home/gabrielvargas7/
+
+use rdgml_development
+
+mysql> source /home/gabrielvargas7/sqlAddDataUpdated.sql;
+
+mysql> source /Users/gabrielvargas7/Documents/rdgml_files/sqlAddDataUpdated.sql;
+
+
+
+
+
+
+

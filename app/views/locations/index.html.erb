@@ -1,0 +1,58 @@
+<h1>Listing locations</h1>
+
+<h3>
+    <%= link_to 'New Location', new_location_path %>
+</h3>
+<table class="table table-bordered">
+  <tr>
+    <th>id</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>X</th>
+    <th>Y</th>
+    <th>Z</th>
+    <th>Width</th>
+    <th>Height</th>
+    <th>Section id</th>
+    <th>Section name</th>
+
+    <th></th>
+    <th></th>
+
+  </tr>
+
+<% @locations.each do |location| %>
+  <tr>
+
+    <td><%= location.id %></td>
+    <td><%= location.name %></td>
+    <td><%= location.description %></td>
+    <td><%= location.x %></td>
+    <td><%= location.y %></td>
+    <td><%= location.z %></td>
+    <td><%= location.width %></td>
+    <td><%= location.height %></td>
+
+    <%  if location.section.nil? %>
+        <td></td>
+        <td></td>
+
+    <%  else %>
+        <td><%= location.section.id  %></td>
+        <td><%= location.section.name  %></td>
+
+    <%  end %>
+
+
+
+
+    <td><%= link_to 'Show', location %></td>
+    <td><%= link_to 'Edit', edit_location_path(location) %></td>
+
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+

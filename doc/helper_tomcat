@@ -1,0 +1,91 @@
+helper_tomcat
+
+***
+path
+***
+/etc/tomcat/
+
+--- webpath
+/usr/share/tomcat/webapps/
+
+/var/lib/tomcat/webapps/
+
+# Where your tomcat installation lives
+CATALINA_HOME="/usr/share/tomcat"
+
+
+
+*******
+add user tomcat
+*******
+
+----sudo vi /usr/share/tomcat/conf/tomcat-users.xml
+
+     <user username="admin" password="Newy888!" roles="manager-gui,admin-gui"/>
+
+
+
+************
+restart tomcat
+************
+
+
+---- sudo systemctl restart tomcat
+---- sudo systemctl stop tomcat
+
+
+*******************
+tomcat manager website
+*******************
+
+http://ec2-54-149-17-32.us-west-2.compute.amazonaws.com:8080/manager/
+http://ec2-54-149-17-32.us-west-2.compute.amazonaws.com:8080/host-manager/
+
+name="admin" password="adminadmin"
+
+
+****************
+copy war file manaly
+****************
+
+--- copy to a place where you have rights
+scp -i "chef-key-pair-uswest2.pem" ~/Documents/nisee_app/WebApplication1/dist/WebApplication1.war  ec2-user@ec2-54-149-17-32.us-west-2.compute.amazonaws.com:/home/ec2-user/
+scp -i "chef-key-pair-uswest2.pem" ~/Documents/nisee_app/WebApplication1/dist/WebApplication1.war  ec2-user@ec2-52-37-68-16.us-west-2.compute.amazonaws.com:/home/ec2-user/
+scp -i "chef-key-pair-uswest2.pem" ~/Documents/nisee_app/WebApplication1/dist/WebApplication1.war  ec2-user@ec2-52-36-224-207.us-west-2.compute.amazonaws.com:/home/ec2-user/
+
+
+-- them move it to the tomcat web dir 
+sudo mv /home/ec2-user/WebApplication1.war /usr/share/tomcat/webapps/
+
+
+****************
+tomcat permitions 
+****************
+Folders ---> 755
+Files ---->  644
+
+drwxr-xr-x. 4 tomcat tomcat   52 Feb 17 17:03 WebApplication1
+-rw-r--r--. 1 tomcat tomcat 1297 Feb 17 17:03 WebApplication1.war
+[ec2-user@ip-172-31-29-17 webapps]$ cd WebApplication1
+
+[ec2-user@ip-172-31-29-17 WebApplication1]$ ls -l
+total 4
+-rw-r--r--. 1 tomcat tomcat 446 Feb 12 12:51 index.html
+drwxr-xr-x. 2 tomcat tomcat  42 Feb 17 17:03 META-INF
+drwxr-xr-x. 3 tomcat tomcat  20 Feb 17 17:03 WEB-INF
+
+
+[ec2-user@ip-172-31-29-17 META-INF]$ ls -l
+total 8
+-rw-r--r--. 1 tomcat tomcat  96 Feb 12 12:51 context.xml
+-rw-r--r--. 1 tomcat tomcat 103 Feb 12 12:51 MANIFEST.MF
+
+
+WJM1058113
+
+
+
+
+
+
+

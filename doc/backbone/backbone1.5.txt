@@ -1,0 +1,85 @@
+backbone1.5.txt
+
+var todoItem1 = new TodoItem();
+var todoItem2 = new TodoItem();
+var todoList = [todoitem1,todoitem2];
+
+
+var TodoList = Backbone.Collection.extend({
+	model:TodoItem
+
+});
+var todoList = new TodoList();
+
+
+todoList.length;
+todoList.add(todoItem1);
+
+todoList.at(0); 
+
+todoList.get(1) ---> by id
+
+todoList.remove(todoItem1);
+
+todoList.reset(todos);
+
+
+
+var TodoList = Backbone.Collection.extend({
+	url: '/todos'
+});
+
+
+todoList.fetch();  --> get data for the server
+
+todoList.on('event-name', function(){
+	alert();
+});
+
+todoList.trigger('even-name');
+
+
+todoList.on('reset',doThing);
+
+var = doThing = function(){
+	....
+}
+
+todoList.fetch();
+todoList.reset();
+
+todoList.reset({silent:true});
+
+
+
+todoList.off('reset',doThing);
+
+todoList.on('add',function(todoItem){
+	....
+
+});
+
+
+todoList.reset([
+{describe:'p',status:'in'},
+{},
+]);
+
+todoList.forEach(function(todoItem){
+	alert(todoItem.get('des'));
+
+});
+
+
+todoList.map(function(tI){
+	return todoItem.get('des');   ---> []
+})
+
+todoList.filter(function(todoItem){
+	return todoItem.get('status') === 'inc';
+
+});
+
+
+
+

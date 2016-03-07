@@ -1,0 +1,48 @@
+helper_rvm
+
+#####
+rvm 
+#####
+
+rvm list 
+
+rvm gemset list
+
+
+#####
+ install gem fast, remove doc
+#####
+
+gem install rails --no-ri --no-rdoc
+
+
+
+#####
+ clean all gem from gemset
+#####
+
+$ rvm gemset empty
+
+#####
+create a new gemset for a project 
+#####
+
+  rvm gemset create foo
+
+user a gemset for a project 
+#####
+
+  rvm gemset use foo
+
+
+######
+change gem version
+######
+  rvm rubygems 1.8.25 --force
+
+
+**************** new server 
+
+-- command rvm with gabrielvargas7 
+
+/home/app_peer/.rvm/bin/rvm list    

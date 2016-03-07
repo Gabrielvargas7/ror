@@ -1,0 +1,32 @@
+helper_nisse2
+
+workpress 3.8.5 at Nov 20 2014
+
+ubuntu
+
+apache 2.2
+
+/etc/apache2/
+
+/var/www/
+
+Upgrate wordpress nisse2 
+#*************************
+	backup nisee2 wordpress folder and database
+#*************************
+
+cp -r /var/www/wordpress /home/gabrielvargas7/backup/wordpress_11_20_2014
+
+mysqldump --databases nisee_wp > /home/gabrielvargas7/backup/nisee_wp_11_20_2014.sql  -u root 
+
+p:mypassword
+
+
+
+--- add more memory to world press, add until 128
+
+/var/www/wordpress/wp-includes# cat default-constants.php
+
+/var/www/wordpress# cat wp-config.php
+
+

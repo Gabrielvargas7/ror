@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="span6 offset3">
+
+      <%= form_for(@item) do |f| %>
+      <% if @item.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+          <ul>
+          <% @item.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+        <div class="field">
+          <% unless @item_show_id.nil? %><br />
+              <label>id </label>
+              <%= @item_show_id.id %>
+          <% end %>
+        </div>
+
+       <div class="field">
+        <%= f.label :name %><br />
+        <%= f.text_field :name %>
+      </div>
+
+      <div class="field">
+        <%= f.label :clickable %>
+        <%= f.radio_button :clickable, 'yes', checked: true %>yes</br>
+        <%= f.radio_button :clickable, 'no' %>no
+
+      </div>
+
+        <div class="field">
+          <%= f.label :priority_order %><br />
+          <%= f.number_field :priority_order %>
+        </div>
+
+
+        <div class="field">
+          <%= f.label :image_name %><br />
+          <%= f.file_field :image_name %>
+        </div>
+
+
+        <div class="actions">
+        <%= f.submit %>
+    </div>
+  </div>
+</div>
+<% end %>

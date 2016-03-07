@@ -1,0 +1,16 @@
+
+// Security: private user
+
+//Description
+
+//# GET get user profile
+
+//#  /users/json/show_user_profile_by_user_id/:user_id
+//#  /users/json/show_user_profile_by_user_id/206.json
+//#  /# success    ->  head  200 OK
+
+
+{
+    "email": "gabrielvargas7@gmail.com",
+    "username": "gabrielvargas7-74335-78473"
+}

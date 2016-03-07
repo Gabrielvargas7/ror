@@ -1,0 +1,85 @@
+backbone 1.4
+
+var TodoView - Backbone.View.extend({
+	template: _.template(
+	'<h3>' +
+     
+		'<input type=checkbox ' +
+		'<% if(status === "complete") print("checked") %>/>' +
+
+	     <%= description %>
+	</h3>'
+
+
+
+	),
+
+	events:{
+		'change input': 'toggleStatus'
+	},
+
+	toggleStatus:function(){
+
+		if(this.model.get('status')==='incomplete'){
+		    this.model.set({'status':''complete})
+
+		}else{
+		   this.model.set({'status':'incomplete'})
+		}
+
+
+	},
+
+	render: function(){
+	this.$el.html(this.template(this.model.toJSON()));
+
+	}
+
+});
+
+var todoView = new TodoView({model:todoItem});
+todoView.render();
+console.log(todoView.el);
+
+<div>
+	<h3>PP</h3>
+</div>
+
+
+
+---------------
+var TodoView = Backbone.View.extend({
+	events:{
+		'change input': 'toggleStatus'
+	},
+	initialize:function(){
+		this.model.on('change',this.render,this);
+		this.model.on('destroy',this.remove,this);
+	},
+	toggleStatus: function(){
+		this.model.toggleStatus();
+	},
+	render:function(){
+		this.$el.html(this.template(this.model.toJSON));
+	},
+	remove:function(){
+		this.$el.remove():
+	}
+
+
+
+});
+
+
+var TdoItem = Backbone.Model.extend({
+	toggleStatus : function(){
+
+		if(this.get('status')==='incomplete'){
+			this.set({'status'}:'complte');
+		}else{
+			this.set({'status':'incomplete'})
+		} 
+		this.save();  ---> PUT /todos/1
+	}
+});
+

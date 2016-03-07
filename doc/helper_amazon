@@ -1,0 +1,56 @@
+helper_amazon
+
+************************
+sign to aws with admin user 
+***************************
+
+https://your_aws_account_id.signin.aws.amazon.com/console/
+
+https://599050297870.signin.aws.amazon.com/console/
+
+
+*******
+connect to amazon ec2
+*******
+
+ssh -i "chef-key-pair-uswest2.pem" ec2-user@ec2-54-149-17-32.us-west-2.compute.amazonaws.com
+
+
+*****************
+amazon info
+***************** 
+Instance ID :i-9eb11859
+Public DNS: ec2-54-149-17-32.us-west-2.compute.amazonaws.com
+Public IP: 54.149.17.32
+
+
+
+ssh -i "amazonfreegv.pem" ec2-user@54.152.7.171
+
+** connect to amazon server 
+
+ssh -i <your home directory>/.ssh/<your keypair file> ec2-user@<ec2 hostname>
+
+
+ssh -i ~/.ssh/knife.pem ec2-user@52.90.239.3
+
+
+
+
+*****************
+Identity and Access Management
+*****************
+
+
+gabrielvarags7
+Access Key ID:-->  AKIAIPPPKCW2JMUDSIVQ
+Secret Access Key:   --> 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
+knife[:aws_access_key_id] = "AKIAIPPPKCW2JMUDSIVQ"
+knife[:aws_secret_access_key] = "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"
+
+
+ knife ec2 server create -r "role[ubuntu]" -I  ami-9513c9e6 -f t2.small -S knife -i ~/.ssh/knife.pem --ssh-user ubuntu --region eu-west-1 -Z eu-west-1a
+
+                                        ec2-run-instances ami-9513c9e6 -t t1.micro --region eu-west-1 --key ${EC2_KEYPAIR_EU_WEST_1}
+
+ knife ec2 server create -I  ami-8d756fe4 -N tlibrary -ec2-user 

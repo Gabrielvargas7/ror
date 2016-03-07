@@ -1,0 +1,64 @@
+backbone1.3
+
+var SimpleView = Backbone.View.extend({});
+var si,pleView = new SimpleView();
+
+console.log(simpleView.el)
+
+
+var SimpleView = Backbone.View.extend({tagName:'li'});
+var simpleView = new SimpleView();
+
+console.lof(simpleView.el);
+--> <li></li>
+
+var TodoView = Backbone.View.extend({
+	tagName: 'article',
+	id: 'todo-view',
+	className:'todo'
+});
+
+var todoView = new TodoView();
+console.log(todoView.el);
+<article id='todo-view' class='todo'></article>
+
+
+var todoView = TodoView();
+
+$('#todo-view').html();
+$(todoView.el).html();
+todoView.$el.html();
+
+
+var TodoView = Backbone.View.extend({
+	render: function(){
+		var html = '<h3>'+this.model.get('description')+'</h3>';
+		$(this.el).html(html);
+	}
+});
+
+
+var todoView = new TodoView({model:todoItem});
+todoView.render();
+console.log(todoView.el);
+
+template: _.template(...)
+
+var TodoView = Backbone.View.extend({
+	tagName:'article',
+	id:'todo-view',
+	className:'todo',
+	render: function(){
+
+		var attributes = this.model.toJSON();
+		this.$el.html(this.templete(attributes));
+		var html = '';
+		$(this.el).html(html);  this.$el.html(html);
+
+	}
+
+
+});
+
+
+

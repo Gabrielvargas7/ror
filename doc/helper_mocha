@@ -1,0 +1,15 @@
+helper_mocha
+******************
+install phantomjs 
+******************
+
+-- add it to the path 
+
+sudo ln -s /Users/gabrielvargas7/node_modules/phantomjs/bin/phantomjs /usr/local/bin/
+
+--- run the test
+
+mocha-phantomjs test/test.html
+
+
+http://earthquake.usgs.gov/archive/product/shakemap/atlas19940117123055/atlas/1423011201411/download/fault.kmz

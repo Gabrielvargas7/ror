@@ -1,0 +1,14 @@
+helper_uploader
+
+*******
+copy the upload to my computer 
+******
+
+scp -r peer.berkeley.edu:/www/peer3/rails_apps/uploader  /Users/gabrielvargas7/Documents/rails/
+
+
+***********************
+-- update to admin user 
+***********************
+
+update users set admin=1 where id = 9; 

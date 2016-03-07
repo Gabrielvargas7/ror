@@ -1,0 +1,32 @@
+helper_svn
+
+svn co svn://opensees.berkeley.edu/usr/local/svn/OpenSees/trunk OpenSees
+
+svn info http://opensees.berkeley.edu/usr/local/svn/OpenSees/trunk OpenSees
+
+svn info svn://opensees.berkeley.edu/usr/local/svn/OpenSees/trunk OpenSees
+
+svn info svn://peer.berkeley.edu/usr/local/svn/OpenSees/trunk OpenSees
+
+svn info https://github.com/Gabrielvargas7/ror
+
+
+http://opensees.berkeley.edu/usr/local/svn/OpenSees/trunk
+
+http://peer.berkeley.edu/usr/local/svn/
+
+
+http://peer.berkeley.edu/usr/local/svn/testrepo
+http://peer.berkeley.edu/usr/local/svn/OpenSeesNavigator
+http://peer.berkeley.edu/usr/local/svn/OpenSeesIDE
+http://OpenFresco.berkeley.edu/usr/local/svn/OpenFresco
+
+http://peer.berkeley.edu/usr/local/svn/DataVisualizer
+http://peer.berkeley.edu/usr/local/svn/BuildingTcl
+
+http://peer.berkeley.edu/usr/local/svn/OpenSees/README.txt
+
+
+ peer-prod-01
+
+ svn info svn://peer-prod-01.berkeley.edu/usr/local/svn/OpenSees/trunk OpenSees

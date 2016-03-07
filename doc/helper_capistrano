@@ -1,0 +1,76 @@
+helper capistrano
+
+--- varsion
+cap --version
+# Capistrano Version: 3.1.0 (Rake Version: 10.1.0)
+// show all task
+cap -T 
+
+// show documentation
+cap -e deploy 
+
+--- deploy to porduction
+
+cap production deploy
+
+cap staging deploy
+
+
+
+ssh deploy@remote 'ls -lR /var/www/my-application'
+
+
+// check rvm is the working
+cap staging rvm:check
+
+// run bundle 
+cap staging bundler:install
+
+//run migration 
+
+cap staging deploy:migrate
+cap staging deploy:compile_assets
+
+
+// restart app 
+
+ cap staging deploy:restart 
+
+ // first time deploy 
+ cap staging deploy:setup
+
+
+ *********************************
+ *********************************
+ New server 
+ *********************************
+ *********************************
+ 
+ --- test ssh 
+ ssh gabrielvargas7@peer-prod-01.ist.berkeley.edu 'hostname; uptime'
+
+--- checking that directory and structure on a remote server
+
+ssh gabrielvargas7@peer-prod-01.ist.berkeley.edu 'ls -lR /www/peer3/rails_apps/html/helloapp3'
+
+ssh gabrielvargas7@peer-prod-01.ist.berkeley.edu 'ls -lR /www/peer3/rails_apps/html/helloapp'
+
+--- run command with ssh
+
+ssh -t gabrielvargas7@peer-prod-01.ist.berkeley.edu 'sudo /bin/su -l app_peer'
+
+
+echo "ssh-rsa jccXJ/JRfGxnkh/8iL........dbfCH/9cDiKa0Dw8XGAo01mU/w== /Users/me/.ssh/id_rsa" >> .ssh/authorized_keys
+
+
+
+
+
+
+
+
+
+
+
+
+

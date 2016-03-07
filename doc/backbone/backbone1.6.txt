@@ -1,0 +1,99 @@
+backbone1.6.txt
+
+
+var TdoView = Backbone.View.extend({
+		render: function(){
+			this.$el.html(this.template(this.model.toJSON()));
+			return this;
+		}
+	
+});
+
+var todoItem = new TodoItem();
+var todoView = new TodoView({model:todoItem});
+console.log(todoView.render().el);
+
+<div><h3></h3>/div>
+
+var TodoListView = Backbone.View.extend({});
+var todoListView = new TodoListView({collection:todoList});
+
+
+render: function(){
+	this.collection.forEach(function(){	
+		var todoView = TodoView({model:todoItem});
+		this.el$append(todoView.render().el)
+	});
+}
+
+render:function(){
+	this.collection.forEach(this.addOne,this);	
+} 
+
+addOne: function(todoItem){
+	var todoView = new TodoView({model:todoItem});
+	this.$el.append(todoView.render().el);
+}
+todoListView.render();
+console.log(todoListView.el)
+
+
+
+
+---------------
+var TodoListView = Backbone.View.extend({
+	
+	initialize: function(){
+		this.collection.on('add',this.addOne,this);
+		this.collection.on('reset',this.addAll,this);
+	},
+	addOne:function(todoItem){
+		var todoView = new TodoView({model:todoItem});
+		this.$el.append(todoView.render().el);
+	},
+	addAll:function(){
+		this.collection.forEach(this.addOne, this);
+	},
+	render:function(){
+		this.addAll();
+
+	}
+
+
+});
+
+var newTodoItem = new TodoItem({
+	description:'take out trash.',
+	status:'incomplete'
+});
+
+todoList.add(newTodoItem);
+
+
+var todoList = new TodoList();
+var todoListView = new TodoListView({ collection:todoList });
+
+todolist.fetch();
+
+
+------
+
+initialize: function(){
+	this.on('remove',this.hideModel);	
+},
+hideModel:function(model){
+	model.trigger('hide');
+}
+
+---
+modelView 
+
+initialize:function(){
+	this.model.on('hide',this.remove,this);
+}
+
+
+
+
+
+

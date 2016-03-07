@@ -1,0 +1,336 @@
+helper_new_server
+
+version redhat-release-server-6Server-6.7.0.3.el6.x86_64
+
+ssh peer-prod-01.ist.berkeley.edu
+
+
+
+*********************
+move to app user 
+*********************
+sudo /bin/su -l app_peer
+
+
+rvm list
+
+rvm rubies
+
+Include /etc/httpd/conf.d/module-*.conf
+Include /etc/httpd/custom.d/*.conf
+Include /etc/httpd/conf.d/vhost-*.conf
+
+
+
+************************************
+************************************ 
+passenger
+************************************
+************************************
+
+
+
+   LoadModule passenger_module /home/app_peer/.rvm/gems/ruby-1.9.3-p484/gems/passenger-4.0.59/buildout/apache2/mod_passenger.so
+   <IfModule mod_passenger.c>
+     PassengerRoot /home/app_peer/.rvm/gems/ruby-1.9.3-p484/gems/passenger-4.0.59
+     PassengerDefaultRuby /home/app_peer/.rvm/gems/ruby-1.9.3-p484/wrappers/ruby
+   </IfModule>
+
+After you restart Apache, you are ready to deploy any number of web
+applications on Apache, with a minimum amount of configuration!
+
+Press ENTER to continue.
+
+
+--------------------------------------------
+
+Deploying a web application: an example
+
+Suppose you have a web application in /somewhere. Add a virtual host to your
+Apache configuration file and set its DocumentRoot to /somewhere/public:
+
+   <VirtualHost *:80>
+      ServerName www.yourhost.com
+      # !!! Be sure to point DocumentRoot to 'public'!
+      DocumentRoot /somewhere/public    
+      <Directory /somewhere/public>
+         # This relaxes Apache security settings.
+         AllowOverride all
+         # MultiViews must be turned off.
+         Options -MultiViews
+         # Uncomment this if you're on Apache >= 2.4:
+         #Require all granted
+      </Directory>
+   </VirtualHost>
+
+And that's it! You may also want to check the Users Guide for security and
+optimization tips, troubleshooting and other useful information:
+
+************************************
+************************************
+end passenger
+************************************
+************************************
+
+
+ssh app_peer@peer-prod-01.ist.berkeley.edu 'hostname; uptime'
+
+*************
+edit file
+*************
+vim /www/peer3/rails_apps/html/spo/shared/lib/tasks/populate_support_data.rake 
+
+
+scp -r  /Users/gabrielvargas7/Documents/rails/spo/lib/tasks/populate_support_data.rake peer-prod-01.ist.berkeley.edu:/www/peer3/rails_apps/html/spo/shared/lib/tasks/populate_support_data.rake
+
+scp -r  /Users/gabrielvargas7/Documents/rails/spo/lib/tasks/populate_support_data.rake peer-prod-01.ist.berkeley.edu:/www/peer3/rails_apps/html/spo/shared/lib/tasks/populate_support_data.rake
+
+ JSON.parse(open(url).read)
+
+  /www/peer3/rails_apps/html/rdgml_passenger/current/
+
+  /www/peer3/rails_apps/html/rdgml_passenger/current/public/
+  /www/peer3/rails_apps/html/rdgml_passenger/current/public/
+
+  
+
+   /home/app_peer/.rvm/gems/ruby-1.9.3-p551@rdgml_passenger/wrappers/ruby
+   /home/app_peer/.rvm/gems/ruby-2.1.5@spo/wrappers/ruby
+
+
+************************
+tranfer files from the old server to the new one
+**************************
+
+--- copy backup spo and rdgml 
+
+cp -r /www/peer3/rails_apps/html/  /home/gabrielvargas7/
+
+cp -r /home/gabrielvargas7/html/ /www/peer3/rails_apps/
+
+cp -r /home/gabrielvargas7/copy_oldserver/html/ /www/peer3/rails_apps/
+
+cp -r /home/gabrielvargas7/spo_oldserver/uploads/ /www/peer3/rails_apps/html/spo/shared/public/
+
+cp -r /www/peer3/rails_apps/html/spo_passenger_1/shared/public/uploads/ /www/peer3/rails_apps/html/spo_passenger/shared/public/
+
+
+scp -rCv /www/peer3/rails_apps/rdgml/app/ peer-prod-01.ist.berkeley.edu:/home/gabrielvargas7/
+
+scp -rCv -c blowfish /www/peer3/rails_apps/uploader/ gabrielvargas7@peer-prod-01.ist.berkeley.edu:/www/peer3/rails_apps/
+
+scp -rC /www/peer3/ gabrielvargas7@peer-prod-01.ist.berkeley.edu:/www/
+
+scp -rC /Users/gabrielvargas7/Documents/maintenance/ gabrielvargas7@peer.berkeley.edu:/www/peer3/maintenance_page/
+
+
+
+
+scp -rC /www/peer3/rails_apps/html/helloapp3/ gabrielvargas7@peer-prod-01.ist.berkeley.edu:/www/peer3/rails_apps/html/
+
+scp -rC /www/peer3/UCPRForum/ gabrielvargas7@peer-prod-01.ist.berkeley.edu:/www/peer3/
+
+scp -rC /www/peer3/publications/ gabrielvargas7@peer-prod-01.ist.berkeley.edu:/www/peer3/
+chgrp -R webmaster publications
+
+
+scp -rC /etc/httpd/conf/extra/httpd-openseesnavigator-site.conf gabrielvargas7@peer-prod-01.ist.berkeley.edu:/etc/httpd/peer.d/httpd-openseesnavigator-site.conf
+
+
+
+rsync -avzhe ssh --progress /home/rpmpkgs root@192.168.0.100:/root/rpmpkgs
+
+
+rsync -avzhe ssh --progress /www/peer3/rails_apps/rdgml/ gabrielvargas7@peer-prod-01.ist.berkeley.edu:/home/gabrielvargas7/rdgml
+
+rsync -avzhe ssh --progress /www/peer3/ gabrielvargas7@peer-prod-01.ist.berkeley.edu:/www/peer3/
+
+rsync -vzhe ssh --progress /www/peer3/rails_apps/html/helloapp3/ gabrielvargas7@peer-prod-01.ist.berkeley.edu:/www/peer3/rails_apps/html/helloapp3/
+
+-- copy databases 
+
+mysqldump -uroot -plocalrootpassword -a --databases drupaldatabase1 drupaldatabase2 drupaldatabase3 drupaldatabase4 | ssh root@destinationserver.com "mysql -uroot -pdestinationrootpassword"
+
+mysqldump -uroot -pmypassword -a --databases gvtest1 gvtest2 | ssh gabrielvargas7@peer-prod-01.ist.berkeley.edu "mysql -uroot -pmypassword"
+
+
+
+---- databases 1 
+mysqldump -uroot -pmypassword -a --databases NGL UCPRForum annual_meeting annual_meeting2011 annual_meeting2012 annual_meeting2013 bridgepbee_wordpress event_loma_prieta event_northridge events geoengineering_lecture geoengineering_lecture_2011 geoengineering_lecture_2012 globalgmpe globalgmpe_wg   | ssh gabrielvargas7@peer-prod-01.ist.berkeley.edu "mysql -uroot -pmypassword"
+                
+--- databases 2
+mysqldump -uroot -pmypassword -a --databases gmsm graceK grandchallenge lifelines mediawiki nees_edefense_2013 news news_old ngaeast ngaeast_wg ngasub ngawest2 ngawest2_wg nuclear_wg openfresco opensees_wordpress  | ssh gabrielvargas7@peer-prod-01.ist.berkeley.edu "mysql -uroot -pmypassword"    
+    
+--- databases 3              
+mysqldump -uroot -pmypassword -a --databases openseesnavigator pedms_development pedms_production peer_ground_motion_database_feedback peercontent phpBB2 phpBB3 prediction_contest prediction_contest_2011 rdgml2_production rdgml_development rdgml_development_10_22_2014_backup   | ssh gabrielvargas7@peer-prod-01.ist.berkeley.edu "mysql -uroot -pmypassword"
+ 
+
+ -- databases 4
+mysqldump -uroot -pmypassword -a --databases rdgml_production spo_production spo_test tbi test_wordpress transportation transportation_wg tsunami upload uploader_production wordpress_migration yousef  | ssh gabrielvargas7@peer-prod-01.ist.berkeley.edu "mysql -uroot -pmypassword"
+
+
+mysqldump -uroot -pmypassword -a --databases rdgml_production  openseesnavigator opensees_wordpress | ssh gabrielvargas7@peer-prod-01.ist.berkeley.edu "mysql -uroot -pmypassword"
+
+mysqldump -uroot -pmypassword -a --databases phpBB3 | ssh gabrielvargas7@peer-prod-01.ist.berkeley.edu "mysql -uroot -pmypassword"
+
+mysqldump -uroot -pmypassword -a --databases mediawiki  | ssh gabrielvargas7@peer-prod-01.ist.berkeley.edu "mysql -uroot -pmypassword"
+
+mysqldump -uroot -pmypassword -a --databases UCPRForum  | ssh gabrielvargas7@peer-prod-01.ist.berkeley.edu "mysql -uroot -pmypassword"
+
+
+| NGL                                  | 
+| UCPRForum                            | 
+| annual_meeting                       | 
+| annual_meeting2011                   | 
+| annual_meeting2012                   | 
+| annual_meeting2013                   | 
+| bridgepbee_wordpress                 | 
+| event_loma_prieta                    | 
+| event_northridge                     | 
+| events                               | 
+| geoengineering_lecture               | 
+| geoengineering_lecture_2011          | 
+| geoengineering_lecture_2012          | 
+| globalgmpe                           | 
+| globalgmpe_wg                        | 
+| gmsm                                 | 
+| graceK                               | 
+| grandchallenge                       | 
+| lifelines                            | 
+| mediawiki                            | 
+| mysql                                | 
+| nees_edefense_2013                   | 
+| news                                 | 
+| news_old                             | 
+| ngaeast                              | 
+| ngaeast_wg                           | 
+| ngasub                               | 
+| ngawest2                             | 
+| ngawest2_wg                          | 
+| nuclear_wg                           | 
+| openfresco                           | 
+| opensees_wordpress                   | 
+| openseesnavigator                    | 
+| pedms_development                    | 
+| pedms_production                     | 
+| peer_ground_motion_database_feedback | 
+| peercontent                          | 
+| phpBB2                               | 
+| phpBB3                               | 
+| prediction_contest                   | 
+| prediction_contest_2011              | 
+| rdgml2_production                    | 
+| rdgml_development                    | 
+| rdgml_development_10_22_2014_backup  | 
+| rdgml_production                     | 
+| spo_production                       | 
+| spo_test                             | 
+| tbi                                  | 
+| test_wordpress                       | 
+| transportation                       | 
+| transportation_wg                    | 
+| tsunami                              | 
+| upload                               | 
+| uploader_production                  | 
+| wordpress_migration                  | 
+| yousef                               | 
+| yousef_reference_materials 
+
+CREATE TABLE gv_tbl(id INT NOT NULL AUTO_INCREMENT,title VARCHAR(100) NOT NULL,author VARCHAR(40) NOT NULL,submission_date DATE,PRIMARY KEY ( id ));
+
+INSERT INTO gv_tbl(title,author,submission_date) VALUES('one','two',NOW());
+
+
+ "/home/app_peer/rdgml_archive/ngawest2_files/"
+
+ mv /www/peer3/rails_apps/html/rdgml_passenger/shared/archive/ngawest2_files/  /home/app_peer/rdgml_archive/ngawest2_files/
+
+chgrp -R webmaster opensees
+
+
+
+    
+    
+
+    Alias /openfresco "/www/peer3/openfresco"
+    <Directory "/www/peer3/openfresco">
+        AllowOverride all 
+        Options -Indexes FollowSymLinks
+
+        <Limit GET POST OPTIONS>
+            Order allow,deny
+            Allow from all
+        </Limit>
+        <LimitExcept GET POST OPTIONS>
+            Order deny,allow
+            Deny from all
+        </LimitExcept>
+    </Directory>
+
+
+<VirtualHost *:1080>
+    #DH# ServerAdmin opensees@berkeley.edu
+    ServerAdmin unixteam@berkeley.edu
+    
+    DocumentRoot /www/peer3/opensees
+    ServerName opensees.berkeley.edu
+    
+    ErrorLog logs/opensees_80-error_log
+    CustomLog logs/opensees_80-access_log common
+    CustomLog logs/opensees_80-combined_log combined
+    ErrorDocument 404 /index.html
+    UserDir disabled
+
+    <Directory "/www/peer3/opensees">
+        AllowOverride all
+        Options -Indexes FollowSymLinks
+        <Limit GET POST OPTIONS>
+            Order allow,deny
+            Allow from all
+        </Limit>
+        <LimitExcept GET POST OPTIONS>
+            Order deny,allow
+            Deny from all
+        </LimitExcept>
+    </Directory>
+
+    Include peer.d/subversion.conf
+
+Redirect /OpenSeesNavigator http://openseesnavigator.berkeley.edu
+
+
+sftp username@remote_hostname_or_IP
+
+sftp gabrielvargas7@peer.berkeley.edu
+
+
+*****************
+force restart apache
+*****************
+
+
+(Verify PID file was missing:)
+1. ls /var/run/httpd/httpd.pid
+
+2. sudo su - app_peer
+
+(as app_peer:)
+3. killall httpd ; exit
+
+(as yourself:)
+4. sudo /sbin/service httpd start
+
+
+
+
+
+  <% if (structureDisabled === "") {
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-info btn-sm" id="structure_save_btn" > <span class="glyphicon glyphicon-ok-circle"></span> Save</button>
+                <a href="#" class="btn btn-info btn-sm" id="structure_cancel_btn" role="button" > <span class="glyphicon glyphicon-remove-circle"></span> Cancel </a>
+
+
+            </div>
+        </div>
+    }%>

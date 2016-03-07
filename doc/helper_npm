@@ -1,0 +1,38 @@
+
+*************
+install node on mac
+*************
+
+brew install node
+brew upgrade node
+
+-- get the version on node 
+node -v 
+v0.12.2
+
+***************
+-- update npm
+***************
+sudo npm install npm -g
+npm version
+
+
+*************
+start server 
+*************
+
+npm start
+
+---- install 
+npm install lite-server
+
+
+--- permission
+npm config get prefix
+/usr/local/lib/node_modules
+
+change permissions
+-- sudo chown -R gabrielvargas7 /usr/local/ 
+-- sudo chown -R gabrielvargas7 /Users/gabrielvargas7/.npm/
+
+

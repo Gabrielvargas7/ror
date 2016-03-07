@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: hpdn34sdfw
+  api_key: '33488366951312312312312'
+  api_secret: vW42q_EtOB2343249ASSfJxAxRM
+  enhance_image_tag: true
+  static_image_support: true
+production:
+  cloud_name: hpdnsdfsd
+  api_key: '334878682342'
+  api_secret: vW42q_EtOB34545SSfJxAxRM
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: hpdnxsdfsdf
+  api_key: '334877655234324'
+  api_secret: vW42q_EtOB9345345dZ5SSfJxAxRM
+  enhance_image_tag: true
+  static_image_support: true

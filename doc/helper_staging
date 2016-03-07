@@ -1,0 +1,41 @@
+helper_staging
+
+*****************************
+** library server 
+*****************************
+
+
+ssh gabrielvargas7@library.peer.berkeley.edu
+
+########
+folder html 
+########
+/var/www/html/
+
+
+######
+run migration on production
+######
+
+rake db:create RAILS_ENV="production" 
+rake db:migrate RAILS_ENV="production" 
+
+bundle exec rake assets:precompile  RAILS_ENV="production" 
+
+rake db:populate_support_data RAILS_ENV="production"
+
+
+*****************
+// restart the application
+*****************
+
+touch /var/www/html/helloapp3/current/tmp/restart.txt
+
+/// log production 
+
+/var/www/html/helloapp3/current/log/production.log
+
+chown -R deployer:deployer html
+
+
+/www/peer3/rails_apps/html/spo/shared/config/application.yml

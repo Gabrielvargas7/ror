@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @bookmarks_category.name %>
+</p>
+
+<p>
+  <b>Item:</b>
+
+  <%  if @bookmarks_category.item.nil? %>
+    
+    
+
+<%  else %>
+    <%= @bookmarks_category.item.id %>
+    <%= @bookmarks_category.item.name %>
+<%  end %>
+
+
+</p>
+
+
+<%= link_to 'Edit', edit_bookmarks_category_path(@bookmarks_category) %> |
+<%= link_to 'Back', bookmarks_categories_path %>

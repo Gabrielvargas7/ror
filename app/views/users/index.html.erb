@@ -1,0 +1,28 @@
+<% provide(:title, 'All users') %>
+<h1>All users</h1>
+<%= will_paginate %>
+
+
+
+<table class="table table-bordered">
+  <tr>
+    <th>User Id</th>
+    <th>Email</th>
+    <th>UserName</th>
+
+
+  </tr>
+
+  <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.email %></td>
+        <td><%= user.username %></td>
+
+      </tr>
+  <% end %>
+</table>
+
+<%= will_paginate %>
+
+

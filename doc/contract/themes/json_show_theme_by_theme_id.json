@@ -1,0 +1,37 @@
+// controller  ->  ThemesController
+// method type ->  get
+
+// Security: public
+
+// Description ->
+//# GET get one theme by theme id
+//# GET themes/json/show_theme_by_theme_id/:theme_id
+//#     themes/json/show_theme_by_theme_id/1.json
+//#Return head 200 OK
+
+
+
+// back_end   :done
+// front_end :working
+
+{
+    "brand": null,
+    "category": null,
+    "color": null,
+    "created_at": "2013-05-17T20:32:54Z",
+    "description": "Psychologists claim that this color calms, relaxes and ispires for achivements. Let's try?",
+    "id": 1,
+    "image_name": {
+        "url": "http://res.cloudinary.com/hpdnx5ayv/image/upload/v1368822775/74977-theme-image_name-turquoise-loft.jpg"
+    },
+    "image_name_selection": {
+        "url": "http://res.cloudinary.com/hpdnx5ayv/image/upload/v1368822776/36690-theme-image_name_selection-turquoise-loft-popthumb.jpg"
+    },
+    "like": null,
+    "location": null,
+    "make": null,
+    "name": "Turquoise Loft 1",
+    "special_name": null,
+    "style": null,
+    "updated_at": "2013-06-21T00:42:41Z"
+}

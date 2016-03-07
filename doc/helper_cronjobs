@@ -1,0 +1,86 @@
+helper cronjobs
+
+crontab -l
+
+
+*************
+edit file
+*************
+
+crontab -e
+
+
+*****
+number of ruby instance running
+****
+ ps -ef | grep ruby | wc -l
+
+
+******
+logs 
+****** 
+tail -100 /var/mail/root
+
+
+*****
+restart
+*****
+
+/sbin/service crond restart
+
+0 2 * * * /bin/find /path/to/files/ -type f -mtime +2 -exec rm -rf {} \;
+
+0 2 * * * find /archive/ngawest2_files/Utility/ -type f -mtime +7 -exec rm -rf {} \;
+
+0 2 * * * find /tmp/ -type f -mtime +2 -exec rm -rf {} \;
+			        
+
+*****************
+backup sql database
+*****************
+
+15 2 * * * mysqldump -u root -pPASSWORD --all-databases | gzip > /mnt/disk2/database_`data ' %m-%d-%Y'`.sql.gz 
+
+
+# GV 05-19-2015 run backup everyday at 12 am for  all databases
+0 0 * * * mysqldump -u root -pmypassword  --all-databases | gzip > /home/gabrielvargas7/backups/databases_`date +%m-%d-%Y`.sql
+
+0 0 * * * mysqldump -u root -pmypassword --databases rdgml_development > /home/gabrielvargas7/backups/rdgml_development_`date +%m-%d-%Y`.sql
+0 1 * * * mysqldump -u root -pmypassword --databases spo_production > /home/gabrielvargas7/backups/spo_production_`date +%m-%d-%Y`.sql
+
+#GV 05-19-2015 run at 2am every day, -->  delete temp files older that 14 days
+
+#GV 05-19-2015 run at 2am every day, -->  delete temp files older that 14 days
+0 2 * * * find /home/gabrielvargas7/backups/ -type f -mtime +14 -exec rm -rf {} \;
+
+#GV 12-01-2015 run at 2am every day, -->  delete temp files older that 30 days 
+0 2 * * * find /tmp/ -user app_peer -atime +30 -delete
+
+
+#GV 02-9-2015 run at 2am every day, -->  delete temp files older that 1 days
+0 2 * * * find /www/peer3/rails_apps/html/rdgml_passenger/shared/tmp/ -type f -mtime +1 -exec rm -rf {} \;
+
+#GV 02-9-2015 run at 2am every day, -->  delete temp files older that 7 days 
+0 2 * * * find /home/app_peer/rdgml_archive/ngawest2_files/Utility/ -type f -mtime +7 -exec rm -rf {} \;
+
+
+ mysqldump -u root -p{PASSWORD} DBNAME 2>> "/filename_`date '+%Y-%m-%d'`.sql"
+mysqldump -u root -pmypassword --databases spo_production > /home/gabrielvargas7/backups/spo_production_`date '+%m-%d-%Y'`.sql
+mysqldump -u root -pmypassword --databases rdgml_development > /home/gabrielvargas7/backups/rdgml_development_`date '+%m-%d-%Y'`.sql
+
+
+
+
+/home/gabrielvargas7/.cronsh/database_backup.sh
+
+find /tmp/  -user app_peer -type f -mtime +30 -exec rm -rf {} \
+
+find /tmp/ -user app_peer -atime +30 -delete
+
+******
+
+find /tmp/ -group app_peer | xargs ls -oAHd
+
+
+
+

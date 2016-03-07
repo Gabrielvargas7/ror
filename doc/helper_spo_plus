@@ -1,0 +1,43 @@
+spo_plus
+
+
+********************
+-Change permisitions of the folder
+
+
+----NOTE: becareful on the folder where you are 
+
+chown -R apache:rvm spo_plus
+
+----get in to the folder spo_plus and the run
+
+find . -type f -exec chmod 664 {} \;
+find . -type d -exec chmod 775 {} \;
+
+
+
+
+---to restart the server, we need to create a empty new file tmp/restart.txt
+
+touch /www/peer3/rails_apps/spo_plus/tmp/restart.txt
+
+rails g scaffold FormCondition name:string 
+
+rails g scaffold FormRecommendation name:string detailed_evaluation:string
+
+rails g scaffold FormOverallRatingInspection inspection_type:string location:string 
+
+rails g scaffold EvaluationForm structure_earthquake_format_id:integer form_type:string form_overall_rating_inspection_id:integer inspector_id:string affiliation:string inspection_date:date inspection_time:time posted_assessment:string comments:text additional_notes:text estimated_cost:decimal  
+
+
+rails g scaffold EvaluationFormCondition evaluation_form_id:integer condition_id:integer condition_review:string 
+
+rails g scaffold EvaluationFormRecommendation evaluation_form_id:integer comments:string form_recommendation_id:integer
+
+rails g scaffold EvaluationPosting evaluation_form_id:integer posting_type:string form_posting_id:integer 
+
+rails g scaffold EvaluationFormStructureSystem evaluation_form_id:integer form_structure_system_id:integer structural_system_other:string 
+
+
+
+rails g scaffold StructureAccess user_id:integer structure_id:integer access_type_id:integer

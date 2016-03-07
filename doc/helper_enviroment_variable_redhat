@@ -1,0 +1,71 @@
+helper_enviroment_variable_redhat
+
+HOSTNAME=peer.berkeley.edu
+rvm_bin_path=/usr/local/rvm/bin
+GEM_HOME=/usr/local/rvm/gems/ruby-1.9.3-p484
+SHELL=/bin/bash
+TERM=xterm-256color
+HISTSIZE=1000
+SSH_CLIENT=128.32.145.16 58412 22
+IRBRC=/usr/local/rvm/rubies/ruby-1.9.3-p484/.irbrc
+OLDPWD=/etc/httpd/conf/extra
+MY_RUBY_HOME=/usr/local/rvm/rubies/ruby-1.9.3-p484
+SSH_TTY=/dev/pts/4
+USER=gabrielvargas7
+JRE_HOME=/etc/alternatives/jre
+LS_COLORS=
+_system_type=Linux
+rvm_path=/usr/local/rvm
+rvm_prefix=/usr/local
+PATH=/usr/local/rvm/gems/ruby-1.9.3-p484/bin:/usr/local/rvm/gems/ruby-1.9.3-p484@global/bin:/usr/local/rvm/rubies/ruby-1.9.3-p484/bin:/usr/local/rvm/bin:/usr/kerberos/sbin:/usr/local/jruby/bin:/etc/alternatives/java_sdk/bin:/usr/local/tomcat/conf:/usr/kerberos/bin:/usr/local/jruby/bin:/etc/alternatives/java_sdk/bin:/usr/local/tomcat/conf:/usr/local/bin:/bin:/usr/bin:/home/gabrielvargas7/bin
+MAIL=/var/spool/mail/gabrielvargas7
+JRUBY_HOME=/usr/local/jruby
+PWD=/etc/httpd/conf
+INPUTRC=/etc/inputrc
+JAVA_HOME=/etc/alternatives/java_sdk
+LANG=en_US.UTF-8
+_system_arch=x86_64
+_system_version=5
+SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+rvm_version=1.25.31 (stable)
+HOME=/root
+SHLVL=2
+LOGNAME=gabrielvargas7
+CVS_RSH=ssh
+SSH_CONNECTION=128.32.145.16 58412 169.229.192.189 22
+GEM_PATH=/usr/local/rvm/gems/ruby-1.9.3-p484:/usr/local/rvm/gems/ruby-1.9.3-p484@global
+LESSOPEN=|/usr/bin/lesspipe.sh %s
+JRUBY_OPTS=
+RUBY_VERSION=ruby-1.9.3-p484
+_system_name=RedHat
+G_BROKEN_FILENAMES=1
+rvm_debug=() {  (( ${rvm_debug_flag:-0} )) || return 0;
+ if rvm_pretty_print stderr; then
+ printf "%b" "${rvm_debug_clr:-}$*${rvm_reset_clr:-}\n";
+ else
+ printf "%b" "$*\n";
+ fi 1>&2
+}
+_=/usr/bin/printenv
+
+
+***********************
+
+
+	RackEnv production
+#	PassengerEnabled on
+	PassengerUploadBufferDir /usr/local/apache/tmp
+	PassengerTempDir /usr/local/apache/tmp
+	PassengerDefaultUser apache
+	PassengerDefaultGroup apache
+	PassengerLogLevel 3
+	PassengerDebugLogFile /var/log/httpd/passenger.log
+<Directory "/www/peer3">
+
+ PassengerRuby /usr/local/rvm/wrappers/ruby-1.9.3-p194/ruby
+
+
+
+ PassengerBaseURI /spo
+ PassengerAppRoot /websites/blog
+  PassengerRuby /usr/local/rvm/wrappers/jruby-1.7.1/ruby

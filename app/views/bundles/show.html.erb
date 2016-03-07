@@ -1,0 +1,97 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <b>Id:</b>
+  <%= @bundle.id %>
+</p>
+<p>
+  <b>Name:</b>
+  <%= @bundle.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @bundle.description %>
+</p>
+<p>
+  <b>Active:</b>
+  <%= @bundle.active %>
+</p>
+<p>
+  <b>Category:</b>
+  <%= @bundle.category %>
+</p>
+<p>
+  <b>Style:</b>
+  <%= @bundle.style %>
+</p>
+<p>
+  <b>Brand:</b>
+  <%= @bundle.brand %>
+</p>
+<p>
+  <b>Location:</b>
+  <%= @bundle.location %>
+</p>
+<p>
+  <b>Color:</b>
+  <%= @bundle.color %>
+</p>
+<p>
+  <b>Make:</b>
+  <%= @bundle.special_name %>
+</p>
+<p>
+  <b>Special Name:</b>
+  <%= @bundle.special_name %>
+</p>
+<p>
+  <b>Like:</b>
+  <%= @bundle.like %>
+</p>
+
+
+
+<p>
+  <b>Theme:</b>
+    <%  if @bundle.theme.nil? %>
+    
+<%  else %>
+    <%= @bundle.theme.id %>
+    <%= @bundle.theme.name %>
+     <%= image_tag @bundle.theme.image_name.url().to_s ,width: 100, height:100 %>
+
+<%  end %>
+
+
+</p>
+
+<p>
+  <b>Section:</b>
+  <%  if @bundle.section.nil? %>
+
+  <%  else %>
+      <%= @bundle.section.id %>
+      <%= @bundle.section.name %>
+
+  <%  end %>
+
+</p>
+
+
+<p>
+  <b>Image name:</b>
+  <%= image_tag @bundle.image_name.url.to_s %>
+  <%= @bundle.image_name.to_s %>
+</p>
+
+<p>
+  <b>Image Name Set:</b>
+  <%= image_tag @bundle.image_name_set.url.to_s %>
+  <%= @bundle.image_name_set.to_s %>
+</p>
+
+
+
+
+<%= link_to 'Edit', edit_bundle_path(@bundle) %> |
+<%= link_to 'Back', bundles_path %>

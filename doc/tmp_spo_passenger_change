@@ -1,0 +1,91 @@
+tmp_spo_passenger_change
+
+******
+--- install rvm 
+******
+curl -L get.rvm.io | bash -s stable
+
+
+-- with the webmaster user (not root) 
+curl -sSL https://get.rvm.io | sudo bash -s stable
+
+source /etc/profile.d/rvm.sh
+
+-- test rvm  
+type rvm | head -n1
+
+
+-- add the user to a group 
+usermod -a -G rvm gabrielvargas7
+
+
+-- install ruby 
+rvm install 2.1.2
+
+rvm install 1.9.3 
+rvm use 1.9.3 --default
+
+-- create rvm gemset group 
+
+rvm gemset create pedms
+
+-- check the gemset  
+rvm  gemset list
+ 
+
+-- move to gemset 
+rvm 1.9.3@pedms
+
+-- check if is on the gemset  pedms 
+rvm gemset list
+
+-- install passenger 
+
+gem install passenger 
+--select for ruby 
+
+-- compile the module for apache
+passenger-install-apache2-module
+
+
+-- 
+
+************************
+-- select the default rvm, should be 1.9.3-p484
+rvm default 
+
+-- check if passenger gem is there,  
+gem list passenger
+---- should show you passnger 3.0.21 (if don't show install it with (gem install passenger -v 3.0.21)
+
+-- if passenger is installed,  run this and select ruby 
+passenger-install-apache2-module
+
+
+-- then on the file httpd.conf find the lines
+
+#DH# LoadModule passenger_module /usr/local/rvm/gems/ruby-1.9.3-p484/gems/passenger-3.0.21/ext/apache2/mod_passenger.so
+#DH# PassengerRoot /usr/local/rvm/gems/ruby-1.9.3-p484/gems/passenger-3.0.21
+#DH# PassengerRuby /usr/local/rvm/wrappers/ruby-1.9.3-p484/ruby
+
+
+-- un-coment three line 
+
+ LoadModule passenger_module /usr/local/rvm/gems/ruby-1.9.3-p484/gems/passenger-3.0.21/ext/apache2/mod_passenger.so
+ PassengerRoot /usr/local/rvm/gems/ruby-1.9.3-p484/gems/passenger-3.0.21
+ PassengerRuby /usr/local/rvm/wrappers/ruby-1.9.3-p484/ruby
+
+-- restart the apache server 
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,145 @@
+helper_deploy
+
+********************
+** Backup wesite,   
+********************
+copy all the files to you personal folder with the date
+(image and personal files are very importan)
+
+cp -r /www/peer3/rails_apps/pedms/ /home/gabrielvargas7/backup/pedms/10_09_2014/pedms
+
+
+********************
+** Backup mysql database,   
+********************
+
+-- on backup/pedms_db/
+
+-- backup with the root user
+
+mysqldump --databases pedms_production > /home/gabrielvargas7/backup/pedms_db/09_26_2014_pedms.sql  -u root 
+
+-- check the size and compare from the last one. 
+
+ls -l 
+
+
+
+********************
+** deploy, --  copy only rb, css,js files   
+********************
+Note: becarful with the images, and config files. 
+
+-- delete the folder pedms1 from /home/gabrielvargas7/last_pedms/   
+
+rm -rf /home/gabrielvargas7/last_pedms/pedms1
+
+1-. copy the application from my computer to server /home/gabrielvargas7/last_pedms/ 
+
+
+scp -r  /Users/gabrielvargas7/Documents/rails/pedms1 peer.berkeley.edu:/home/gabrielvargas7/last_pedms
+
+
+--- one file --- scp -r  /Users/gabrielvargas7/Documents/rails/pedms1/app/views/structures/index.html.erb peer.berkeley.edu:/home/gabrielvargas7/
+
+********************
+
+----delete all the upload images and files 
+
+  
+rm -rf /home/gabrielvargas7/last_pedms/pedms1/public/uploads/*
+
+********************
+
+----copy the file from the webserver
+
+cp -r /www/peer3/rails_apps/pedms/public/uploads /home/gabrielvargas7/last_pedms/pedms1/public/
+---- check the folder
+
+********************
+
+----delete the file database.yml
+
+rm -r /home/gabrielvargas7/last_pedms/pedms1/config/database.yml
+----check the folder
+
+********************
+
+copy the database.yml 
+cp -r /www/peer3/rails_apps/pedms/config/database.yml /home/gabrielvargas7/last_pedms/pedms1/config/database.yml
+
+---- check the file
+
+
+********************
+
+-- login like a root and
+copy the application to a temporal folder 
+
+cp -r /home/gabrielvargas7/last_pedms/pedms1/  /www/peer3/rails_apps/pedms1_new/
+
+
+---- cp -r /home/gabrielvargas7/index.html.erb  /www/peer3/rails_apps/pedms/app/views/structures/index.html.erb 
+
+********************
+-Change permisitions of the folder
+
+
+----NOTE: becareful on the folder where you are 
+
+chown -R apache:rvm pedms1_new
+
+----get in to the folder pedms1 and the run
+
+find . -type f -exec chmod 664 {} \;
+find . -type d -exec chmod 775 {} \;
+chmod a+x *.sh
+chmod a+x script/*
+
+
+********************
+----change the of the folder 
+
+mv /www/peer3/rails_apps/pedms/ /www/peer3/rails_apps/pedms_10_09_2014/
+
+mv /www/peer3/rails_apps/pedms1_new/ /www/peer3/rails_apps/pedms/
+
+
+********************
+
+---move to rvm gemset 
+
+rvm 1.9.3-p484@pedms
+rvm gemset list
+
+bundle install
+
+---create a migration 
+
+bundle exec rake db:migrate RAILS_ENV="production"
+
+bundle exec rake db:populate_support_details RAILS_ENV="production"
+        
+********************
+---restart sunspot
+
+rake sunspot:solr:start RAILS_ENV="production"
+
+********************
+
+
+---to restart the server, we need to create a empty new file tmp/restart.txt
+
+touch /www/peer3/rails_apps/pedms/tmp/restart.txt
+
+
+********************
+********************
+********************
+********************
+
+
+
+
+
+

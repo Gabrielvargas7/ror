@@ -1,0 +1,19 @@
+helper_phantomjs
+
+######
+get to REPL and test fast code 	
+#####
+phantomjs 
+>phantomjs.version
+>console.log("hi")
+>window.navigator
+
+
+##########
+exit REPL
+##########
+phantomjs.exit()
+CTRL+C
+CTRL+D
+
+

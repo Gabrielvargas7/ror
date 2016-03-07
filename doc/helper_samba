@@ -1,0 +1,61 @@
+helper_samba
+
+*******************
+samba configuration
+*******************
+
+cat /etc/samba/smb.conf
+
+*******************
+restart samba
+*******************
+
+
+ /sbin/service smb restart 
+
+
+-- list share folder
+
+smbclient -U username -L localhost
+smbclient -U gabrielvargas7 -L localhost
+
+smbclient -L yourhostname
+
+smbclient -L localhost
+
+smbclient \\\\localhost\\peer_spws -u gabrielvargas7
+
+
+/home/shared_peerworkspace/peer-spws
+/home/shared_peerworkspace/peeradm-peeradmin
+
+
+
+smbclient -L peera.berkeley.edu
+
+smbclient //<ServerName> -U <username>
+smbclient //peera.berkeley.edu/peer_spws -U gabrielvarags7
+
+smbclient \\\\localhost\\mytmp
+
+*******************
+check is samba is on the server
+*******************
+
+rpm -q samba samba-common samba-client
+
+
+*******************
+test samba
+*******************
+
+testparm /etc/samba/smb.conf
+
+*******************
+add password to user
+*******************
+
+smbpasswd gabrielvargas7
+
+smbpasswd -a erikadonald
+

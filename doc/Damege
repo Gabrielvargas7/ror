@@ -1,0 +1,112 @@
+Damege
+
+
+please check, this taxonomy have a diferent damage, and should be the same. 
+could you fix it. 
+
+level 5
+['Component Name']
+35
+Overall damage~ Superstructure
+36
+Overall damage~ Superstructure
+
+
+***********
+level 5 
+['Component Name']
+73
+Structural system~ Steel~ Braced frame~  Chevron Brace~ with HSS braces~  Brace w < 40 PLF~ Special Concentric Braced Frame~  balanced design criteria
+91
+Structural system~ Steel~ Braced frame~  Chevron Brace~ with HSS braces~  Brace w < 40 PLF~ Special Concentric Braced Frame~  design to AISC minimum standards
+
+***************
+level 5
+
+['Component Name']
+76
+Structural system~ Steel~ Braced frame~  Single Diagonal Brace~ with HSS braces~  Brace w < 40 PLF~ Special Concentric Braced Frame~  balanced design criteria
+94
+Structural system~ Steel~ Braced frame~  Single Diagonal Brace~ with HSS braces~  Brace w < 40 PLF~ Special Concentric Braced Frame~  design to AISC minimum standards
+
+
+level 5
+['Component Name']
+79
+Structural system~ Steel~ Braced frame~  X Brace~ with HSS braces~  Brace w < 40 PLF~ Special Concentric Braced Frame~  balanced design criteria
+97
+Structural system~ Steel~ Braced frame~  X Brace~ with HSS braces~  Brace w < 40 PLF~ Special Concentric Braced Frame~  design to AISC minimum standards
+
+
+
+level 5
+['Component Name']
+82
+Structural system~ Steel~ Braced frame~  Chevron Brace~ with HSS braces~  Brace w < 40 PLF~ Special Concentric Braced Frame~  tapered gusset plates & design to AISC minimum standard
+91
+Structural system~ Steel~ Braced frame~  Chevron Brace~ with HSS braces~  Brace w < 40 PLF~ Special Concentric Braced Frame~  design to AISC minimum standards
+
+
+level 5
+['Component Name']
+85
+Structural system~ Steel~ Braced frame~  Single Diagonal Brace~ with HSS braces~  Brace w < 40 PLF~ Special Concentric Braced Frame~  tapered gusset plates & design to AISC minimum standard
+94
+Structural system~ Steel~ Braced frame~  Single Diagonal Brace~ with HSS braces~  Brace w < 40 PLF~ Special Concentric Braced Frame~  design to AISC minimum standards
+
+level 5
+['Component Name']
+344
+Structural system~ Masonry~ Ordinary reinforced masonry walls with partially grouted cells~ 16" thick~  up to 12 foot tall~  shear dominated
+346
+Structural system~ Masonry~ Ordinary reinforced masonry walls with partially grouted cells~ 16" thick~  up to 12 foot tall~  flexure dominated 
+
+
+['Component Name']
+348
+Structural system~ Masonry~ Special reinforced masonry walls with fully grouted cells~  8" to 12" thick~  up to 12 foot tall~  shear dominated
+350
+Structural system~ Masonry~ Special reinforced masonry walls with fully grouted cells~  8" to 12" thick~  up to 12 foot tall~  flexure dominated
+
+
+['Component Name']
+349
+Structural system~ Masonry~ Special reinforced masonry walls with fully grouted cells~  8" to 12" thick~  greater than 12 foot tall~  shear dominated
+351
+Structural system~ Masonry~ Special reinforced masonry walls with fully grouted cells~  8" to 12" thick~  greater than 12 foot tall~  flexure dominated 
+
+
+['Component Name']
+352
+Structural system~ Masonry~ Special reinforced masonry walls with fully grouted cells~  16" thick~  up to 12' tall~  shear dominated
+354
+Structural system~ Masonry~ Special reinforced masonry walls with fully grouted cells~  16" thick~  up to 12' tall~  flexure dominated 
+
+
+
+
+
+
+['Component Name']
+353
+Structural system~ Masonry~ Special reinforced masonry walls with fully grouted cells~  16" thick~  greater than 12' tall~  shear dominated
+355
+Structural system~ Masonry~ Special reinforced masonry walls with fully grouted cells~  16" thick~  greater than 12' tall~  flexure dominated 
+
+
+['Component Name']
+432
+Non-structural~ Cladding~ Midrise stick-built curtain wall~ Config: Monolithic~  Lamination: Not laminated~  Glass Type: Annealed~  Details: 1/4 in. (6 mm) AN monolithic~ glass-frame clearance = 0.43 in. (11 mm), aspect ratio = 6:5, sealant = dry
+440
+Non-structural~ Cladding~ Midrise stick-built curtain wall~ Config: Monolithic~  Lamination: Not laminated~  Glass Type: Annealed~  Details: 1/4 in. (6 mm) AN monolithic~ glass-frame clearance = 0.43 in. (11 mm), aspect ratio = 6:5, sealant = dry
+
+
+
+['Component Name']
+437
+Non-structural~ Cladding~ Midrise stick-built curtain wall~ Config: Monolithic~  Lamination: Not laminated~  Glass Type: Annealed~  Details: 1/4 in. (6 mm) AN monolithic~ glass-frame clearance = 0.43 in. (11 mm), aspect ratio = 1:2, sealant = dry
+441
+Non-structural~ Cladding~ Midrise stick-built curtain wall~ Config: Monolithic~  Lamination: Not laminated~  Glass Type: Annealed~  Details: 1/4 in. (6 mm) AN monolithic~ glass-frame clearance = 0.43 in. (11 mm), aspect ratio = 1:2, sealant = dry
+
+
+

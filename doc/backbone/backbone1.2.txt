@@ -1,0 +1,105 @@
+
+var TodoItem = Backbone.Model.extend({});
+
+var todoItem = new TodoItem({description:"pick",status:incomplete });
+
+todoItem.get('description');
+
+todoItem.set({status:'new status'});
+
+
+var todoItem = new TodoItem();
+
+todoItem.url = '/todo';
+
+todoItem.fetch();
+
+totoItem.get('description');
+
+
+--- fetching data from the server
+
+var TodoItem = Backbone.Model.extend({urlRoot:'/todos'});
+
+var todoItem = new TodoItem({id:1})
+
+todoItem.fetch(); -- will fetch number 1
+
+todoItem.set({description:'Pk'});
+
+todoItem.save();  -- put request /todos/1
+
+
+var todoItem = new TodoItem();
+todoItem.set({description: 'Fill pre'});
+
+todoItem.save();
+todoItem.get('id');
+
+todoItem.destroy();
+
+todoItem.toJSON();
+
+var TodoItem = Backbone.Model.extend({
+	default:{
+		description: 'Empty todo',
+		status: 'incomplete'
+	}
+
+});
+
+var todoItem = new TodoItem();
+todoItem.get('description');
+todoItem.get('status');
+
+
+--- events
+
+todoItem.on('event-name', function(){
+	alert('event happend')
+});
+
+todoItem.trigger('event-name');
+
+todoItem.on('change',doThing);
+
+var doThing = function(){
+	alert('...');
+} 
+
+
+todoItem.set({description:'fill prescription'});
+
+todoItem.set({description:'fill pre'},{silent:true});
+
+todoItem.off('change',doThing);
+
+todoItem.on(<event>,<method>);
+
+change
+change:<attr> --> todoItem('change:ul','doThing');
+destroy
+sync
+error
+all  -- ant trigger event
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

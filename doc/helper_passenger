@@ -1,0 +1,196 @@
+helper_passenger
+
+********************
+passenger version 3.0.21
+*******************
+
+gem install passenger -v 3.0.21
+
+
+which passenger-config
+
+passenger -v
+
+passenger-config --version
+
+gem install passenger
+
+
+
+-- restart rails app 
+touch tmp/restart.txt
+touch #{current_path}/tmp/stop.txt
+-- start 
+rm -f tmp/stop.txt"
+
+***************
+restart the app on passenger 5
+***************
+passenger-config restart-app
+
+passenger-config restart-app /www/peer3/rails_apps/html/rdgml_passenger/current
+passenger-config restart-app /www/peer3/rails_apps/html/spo/current
+
+*** get more info
+passenger-memory-stats or passenger-status
+
+
+
+
+passenger-install-apache2-module
+
+************************
+passanger log 
+***********************
+/var/log/httpd/passanger.log
+/www2/log/httpd/passenger.log
+
+
+************************
+multiples application
+***********************
+
+<VirtualHost *:443>
+
+    RailsBaseURI /myapp
+    <Directory /apps/myapp>
+      Options -MultiViews
+      PassengerRuby /home/myuser/.rvm/wrappers/ruby-1.8.7-p371/ruby
+    </Directory>
+…
+</VirtualHost>
+
+ 
+10/09/2014 GV: added entry for beta_plus release of SPO
+# These have been added:
+ Alias /spo_plus    /www/peer3/rails_apps/spo_plus/public 
+ <Location /spo_plus>
+        PassengerBaseURI /spo_plus
+        PassengerAppRoot /www/peer3/rails_apps/spo_plus 
+ </Location>
+ <Directory "/www/peer3/spo_plus">
+
+  Order allow,deny
+  PassengerRuby /usr/local/rvm/wrappers/ruby-2.1.3@spo_plus/ruby
+  Allow from all
+  Options -MultiViews
+</Directory>
+
+
+****************************************
+
+
+#10/09/2014 GV: added entry for beta_plus release of SPO
+# These have been added:
+ Alias /spo_plus    /www/peer3/rails_apps/spo_plus/public 
+ <Location /spo_plus>
+        PassengerBaseURI /spo_plus
+        PassengerAppRoot /www/peer3/rails_apps/spo_plus 
+ </Location>
+ <Directory "/www/peer3/rails_apps/spo_plus/public">
+
+  Allow from all
+  Options -MultiViews
+  PassengerRuby /usr/local/rvm/gems/ruby-2.1.3@spo_plus/wrappers/ruby
+</Directory>
+****************************************
+
+
+
+
+
+# These have been added:
+    Alias /subapp /websites/rack/public
+    <Location /subapp>
+        PassengerBaseURI /subapp
+        PassengerAppRoot /websites/rack
+    </Location>
+    <Directory /websites/rack/public>
+        Allow from all
+        Options -MultiViews
+        # Uncomment this if you're on Apache >= 2.4:
+        #Require all granted
+    </Directory>
+
+
+        PassengerBaseURI /peer_reports
+        PassengerAppRoot /www/peer3/rails_apps/uploader 
+        PassengerRuby /usr/local/rvm/gems/ruby-1.9.3-p484@uploader/wrappers/ruby
+
+
+        PassengerAppRoot /www/peer3/rails_apps/pedms
+        PassengerRuby /usr/local/rvm/gems/ruby-1.9.3-p484@pedms/wrappers/ruby
+
+
+        
+
+
+PassengerRuby /usr/local/rvm/gems/ruby-1.9.3-p484@pedms/wrappers/ruby
+
+
+LoadModule passenger_module /usr/local/rvm/gems/ruby-1.9.3-p484@pedms/gems/passenger-4.0.53/buildout/apache2/mod_passenger.so
+   <IfModule mod_passenger.c>
+     PassengerRoot /usr/local/rvm/gems/ruby-1.9.3-p484@pedms/gems/passenger-4.0.53
+     PassengerDefaultRuby /usr/local/rvm/gems/ruby-1.9.3-p484@pedms/wrappers/ruby
+   </IfModule>
+
+--- test memory on passanger 
+passenger-memory-stats or passenger-status
+
+
+
+
+  RackEnv production
+  PassengerEnabled on
+  PassengerUploadBufferDir /usr/local/apache/tmp
+  PassengerTempDir /usr/local/apache/tmp
+  PassengerDefaultUser apache
+  PassengerDefaultGroup apache
+  PassengerLogLevel 1
+
+  #PassengerDebugLogFile /var/log/httpd/passenger.log
+   
+  PassengerDebugLogFile /www2/log/httpd/passenger.log
+
+
+
+***************************
+****** new server
+***************************
+
+Warning: some directories may be inaccessible by the web server!
+
+The web server typically runs under a separate user account for security
+reasons. That user must be able to access the Phusion Passenger files.
+However, it appears that some directories have too strict permissions. This
+may prevent the web server user from accessing Phusion Passenger files.
+
+It is recommended that you relax permissions as follows:
+
+  sudo chmod o+x "/home/app_peer"
+
+Press Ctrl-C to return to the shell. (Recommended)
+After relaxing permissions, re-run this installer.
+  -OR-
+Press Enter to continue anyway.
+
+
+********
+********
+
+  LoadModule passenger_module /home/app_peer/.rvm/gems/ruby-2.1.5/gems/passenger-5.0.6/buildout/apache2/mod_passenger.so
+   <IfModule mod_passenger.c>
+     PassengerRoot /home/app_peer/.rvm/gems/ruby-2.1.5/gems/passenger-5.0.6
+     PassengerDefaultRuby /home/app_peer/.rvm/gems/ruby-2.1.5/wrappers/ruby
+   </IfModule>
+
+
+  LoadModule passenger_module /usr/local/rvm/gems/ruby-2.1.5/gems/passenger-5.0.10/buildout/apache2/mod_passenger.so
+   <IfModule mod_passenger.c>
+     PassengerRoot /usr/local/rvm/gems/ruby-2.1.5/gems/passenger-5.0.10
+     PassengerDefaultRuby /usr/local/rvm/gems/ruby-2.1.5/wrappers/ruby
+   </IfModule>
+
+
+
+

@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="span6 offset3">
+
+      <%= form_for(@bundles_bookmark) do |f| %>
+      <% if @bundles_bookmark.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@bundles_bookmark.errors.count, "error") %> prohibited this bundles_bookmark from being saved:</h2>
+
+          <ul>
+          <% @bundles_bookmark.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+        <div class="field">
+          <% unless @bundles_bookmark_show_id.nil? %><br />
+              <label>id </label>
+              <%= @bundles_bookmark_show_id.id %>
+          <% end %>
+        </div>
+
+        <div class="field">
+          <%= f.label :bookmark %><br />
+          <%= f.collection_select :bookmark_id, Bookmark.all, :id, :id_and_bookmark , :prompt => true  %>
+        </div>
+
+
+        <div class="actions">
+        <%= f.submit %>
+      </div>
+     </div>
+ </div>
+<% end %>

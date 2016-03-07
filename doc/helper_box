@@ -1,0 +1,232 @@
+helper_box
+
+********* test connection
+curl -1 -v --disable-epsv --ftp-skip-pasv-ip -u gabrielvargas7@berkeley.edu  ftps://ftp.box.com 
+
+curl -1 -v --disable-epsv --ftp-skip-pasv-ip -u gabrielvargas7@berkeley.edu --ftp-ssl ftp://ftp.berkeley.app.box.com
+
+ftp-ssl-control
+
+curl -1 -v --disable-epsv --ftp-skip-pasv-ip -u gabrielvargas7@berkeley.edu --ftp-ssl ftps://ftp.box.com:990
+
+*****************
+transfer file 
+*****************
+berkeley.app.box.com
+
+curl -1 -v --disable-epsv --ftp-skip-pasv-ip -u username@example.com --ftp-ssl --upload-file filename ftp://ftp.box.com/<dir>/
+
+curl -1 -v --disable-epsv --ftp-skip-pasv-ip -u gabrielvargas7@berkeley.edu --upload-file EMAILS RE BRACING_3RD.doc ftp://ftp.box.com/test1/
+
+lcd /Users/gabrielvargas7/Download
+
+copy to my computer 
+
+scp -r peera.berkeley.edu:/home/shared_peerworkspace/peer-spws/AASHTO_Working_Docs/ /Volumes/spws_backup/
+scp -r peera.berkeley.edu:/home/shared_peerworkspace/peer-spws/BAIRS_Remote_Application.rdp /Volumes/spws_backup/
+scp -r peera.berkeley.edu:/home/shared_peerworkspace/peer-spws/Contacts/ /Volumes/spws_backup/
+scp -r peera.berkeley.edu:/home/shared_peerworkspace/peer-spws/E1809.pdf /Volumes/spws_backup/
+scp -r peera.berkeley.edu:/home/shared_peerworkspace/peer-spws/IT/ /Volumes/spws_backup/
+scp -r peera.berkeley.edu:/home/shared_peerworkspace/peer-spws/NISEE/ /Volumes/spws_backup/
+scp -r peera.berkeley.edu:/home/shared_peerworkspace/peer-spws/PEER_Policies-MOU/ /Volumes/spws_backup/                                      
+scp -r peera.berkeley.edu:/home/shared_peerworkspace/peer-spws/UCOP_Report/ /Volumes/spws_backup/ 
+scp -r peera.berkeley.edu:/home/shared_peerworkspace/peer-spws/PI_Recharge_Projects/ /Volumes/spws_backup/
+scp -r peera.berkeley.edu:/home/shared_peerworkspace/peer-spws/Presentations_about_PEER/ /Volumes/spws_backup/ 
+scp -r peera.berkeley.edu:/home/shared_peerworkspace/peer-spws/Projects/ /Volumes/spws_backup/ 
+scp -r peera.berkeley.edu:/home/gabrielvargas7/backup_spws/NEESSTAFF/ /Volumes/spws_backup/ 
+
+scp -r peera.berkeley.edu:/home/gabrielvargas7/backup_spws/Staff/ /Volumes/spws_backup/ 
+scp -r peera.berkeley.edu:/home/gabrielvargas7/backup_spws/PEER_Reports/ /Volumes/spws_backup/ 
+scp -r peera.berkeley.edu:/home/gabrielvargas7/backup_spws/Logos/ /Volumes/spws_backup/ 
+scp -r peera.berkeley.edu:/home/gabrielvargas7/backup_spws/PEER_Forms_and_Templates/ /Volumes/spws_backup/ 
+scp -r peera.berkeley.edu:/home/gabrielvargas7/backup_spws/Promotional_Materials/ /Volumes/spws_backup/ 
+
+scp -r peera.berkeley.edu:/home/gabrielvargas7/backup_spws/Meetings-Events/ /Volumes/spws_backup/ 
+scp -r peera.berkeley.edu:/home/gabrielvargas7/backup_spws/Outreach/ /Volumes/spws_backup/ 
+
+
+
+PEER_Forms_and_Templates
+
+
+moving to gabriel backup_spws
+
+mv -v /home/shared_peerworkspace/peer-spws/AASHTO_Working_Docs/ /home/gabrielvargas7/backup_spws/
+mv  /home/shared_peerworkspace/peer-spws/BAIRS_Remote_Application.rdp /home/gabrielvargas7/backup_spws/
+mv  /home/shared_peerworkspace/peer-spws/Contacts/ /home/gabrielvargas7/backup_spws/
+mv  /home/shared_peerworkspace/peer-spws/E1809.pdf /home/gabrielvargas7/backup_spws/
+mv  /home/shared_peerworkspace/peer-spws/IT/ /home/gabrielvargas7/backup_spws/
+mv  /home/shared_peerworkspace/peer-spws/NISEE/ /home/gabrielvargas7/backup_spws/
+mv  /home/shared_peerworkspace/peer-spws/PEER_Policies-MOU/ /home/gabrielvargas7/backup_spws/
+mv  /home/shared_peerworkspace/peer-spws/PI_Recharge_Projects/ /home/gabrielvargas7/backup_spws/
+mv  /home/shared_peerworkspace/peer-spws/UCOP_Report/ /home/gabrielvargas7/backup_spws/
+mv  /home/shared_peerworkspace/peer-spws/Presentations_about_PEER/ /home/gabrielvargas7/backup_spws/
+mv  /home/shared_peerworkspace/peer-spws/Projects/ /home/gabrielvargas7/backup_spws/
+mv  /home/shared_peerworkspace/peer-spws/NEESSTAFF/ /home/gabrielvargas7/backup_spws/
+mv  /home/shared_peerworkspace/peer-spws/Staff/ /home/gabrielvargas7/backup_spws/
+mv  /home/shared_peerworkspace/peer-spws/Video/ /home/gabrielvargas7/backup_spws/
+
+
+mv  /home/shared_peerworkspace/peer-spws/PEER\ Reports/ /home/gabrielvargas7/backup_spws/
+mv  /home/shared_peerworkspace/peer-spws/Images/ /home/gabrielvargas7/backup_spws/
+mv  /home/shared_peerworkspace/peer-spws/Logos/ /home/gabrielvargas7/backup_spws/
+mv  /home/shared_peerworkspace/peer-spws/PEER\ Forms\ \&\ Templates/ /home/gabrielvargas7/backup_spws/
+mv  /home/shared_peerworkspace/peer-spws/Promotional_Materials/ /home/gabrielvargas7/backup_spws/
+
+mv  /home/shared_peerworkspace/peer-spws/Meetings-Events/ /home/gabrielvargas7/backup_spws/
+mv  /home/shared_peerworkspace/peer-spws/Outreach/ /home/gabrielvargas7/backup_spws/
+
+
+
+
+
+
+
+*********************************
+20G   Images
+1.4G  Logos
+81G   Meetings-Events
+51M   PEER Forms & Templates
+20G   PEER Reports
+4.0G  Promotional_Materials
+291G  Video
+36G   Outreach
+
+
+*********************************
+
+28M   AASHTO_ Working Docs
+20K   BAIRS_Remote_Application.rdp
+8.6M  Contacts
+740K  E1809.pdf
+2.0G  IT
+200K  NISEE
+25M   PEER Policies-MOU
+124K  PI_Recharge_Projects
+188K  UCOP_Report
+1.8G  Presentations_about_PEER
+14G   Projects
+54G   NEESSTAFF
+16G   Staff
+
+
+********************************
+
+
+****************************************
+
+for that week Feb 1 to Feb 8,  I can transfer. 
+
+***********
+291G  Video
+***********
+
+for that week Feb 8 to Feb 16,  I can transfer. 
+****************
+20G   PEER Reports
+20G   Images
+1.4G  Logos
+51M   PEER Forms & Templates
+4.0G  Promotional_Materials
+*****************
+
+for that weeks Feb 16 to Feb 29,  I can transfer. 
+**************
+81G   Meetings-Events
+36G   Outreach
+*************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**************************
+tranfer Video folder 
+***************************
+**************************
+**************************
+**************************
+**************************
+
+
+
+32M 2011-Liquefaction-Animations
+  0B  2015-11-19-Olshansky
+100G  20150924_Yiksai_backup
+ 60M  About_PEER_Movie_for_Display_EERI.ppt
+ 12M  Brittle vs Ductile
+116M  Buckling Restrained Braces
+2.1G  David Wald_12-4-14.mp4
+ 99M  Edefense videos
+ 15M  K'NEX Model Examples
+526M  Loma Prieta 20 Conference - 2009
+ 33M  Music
+2.8M  NEES_EEI1_MahinAndreas.wmv 
+ 87G  NEEStips-EDefense
+1.2G  Napa Quadcopter Footage 2014
+564K  RELEASES - Signed
+139M  Ryan-NEESTIPS
+1000M SSHAC Workshop 2014
+4.3M  Shear Wall
+1.4G  SinBerBEST-Singapore-Video
+ 66M  SoCal_Connected
+878M  StampedOutreach 
+506M  Videos for outreach presentation
+2.8G  Yiksai backup
+ 24G  Yiksai's Hard Drive
+ 16M  YouTube logos
+2.4G  _DiscoveringOpenSees
+1.1M  _INTERVIEW-QUESTIONS
+24K  _Sample_Video_Project
+922M  nees2 Grant Videos
+
+
+
+ 13G  _NEESberkeley-Edited-Videos
+ 51G  _PEER-edited-Project-videos 
+
+ 
+
+4.0K  ~$_PEER_Video_Tracking_Spreadsheet.xlsx
+
+28K  PEERVideoTaskList-Kevin-Chris-2012-2013.docx
+28K  Selected Video-webpage outline.doc
+28K  VideoRelease_english.doc
+ 32K  VideoRelease_english2014.doc
+ 4.0K  YouTube-Link-Code.rtf
+16K  _PEER_Video_Tracking_Spreadsheet.xlsx
+ 8.0M  amplitudeFrequency2.avi
+
+140K  nees-berkeley-overview-markups.pdf
+
+
+
+
+
+
+
+
+********************** folder 20150924_Yiksai_backup
+
+50G 2015-10-13 backup
+738M  NEES_reference
+  0B  6982ee3a5cfc4b599156
+  336K  Student Resumes
+1.4G  PEER_reference
+ 26G  Constellation Video_for YW reference
+
+ 21G  Video Projects
+
+**********************
+
+
+

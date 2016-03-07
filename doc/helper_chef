@@ -1,0 +1,366 @@
+helper chef
+
+-- knife --version
+
+--knife client list -VV
+
+*********
+verify connection to chef server 
+*********
+knife ssl check
+
+*********
+Download cookbook from super market https://supermarket.chef.io/
+*********
+
+---->    knife cookbook site download learn_chef_httpd
+
+***** and run it
+--->     tar -zxvf learn_chef_httpd-0.2.0.tar.gz -C cookbooks
+
+***** then remove 
+--->     rm learn_chef_httpd*.tar.gz
+
+
+**************
+verify the server port are open 22 80 443
+
+**************
+
+curl -I http://www.cnn.com | grep HTTP/1.1
+
+curl -I http://ec2-54-149-17-32.us-west-2.compute.amazonaws.com  | grep HTTP/1.1
+              ec2-54-149-17-32.us-west-2.compute.amazonaws.com
+
+
+
+******
+ add new node to chef 
+*****
+-- knife bootstrap library.peer.berkeley.edu -x root -P password  -N library.peer
+-- knife bootstrap uvo1m9uyc3bp5pte5gk.vm.cld.sr -x root -P Gr2ha6D9ZX -N module2
+-- knife bootstrap uvo1dfp6vb4qdwvf7wt.vm.cld.sr -x root -P Cx6ZgJqx00 -N module4
+-- knife bootstrap library.peer.berkeley.edu -x root -P password  -N library.peer
+
+-- knife bootstrap ec2-54-149-17-32.us-west-2.compute.amazonaws.com -x ec2-user -i  ~/.ssh/chef-key-pair-uswest2.pem  --sudo -N gaa.reference.amazon.jsp.webserver
+-- knife bootstrap ec2-54-149-17-32.us-west-2.compute.amazonaws.com -x ec2-user -i  ~/.ssh/chef-key-pair-uswest2.pem  --sudo -N gaa_node_ref_jsp_webserver  --run-list 'role[gaa_role_ref_jsp_webserver]'
+
+
+-----> run it with a recipe
+
+--  knife bootstrap uvo1m9uyc3bp5pte5gk.vm.cld.sr -x root -P Gr2ha6D9ZX -N module2 -r "recipe[apache]"
+--  knife bootstrap uvo1e50ytrzf4h1rzqj.vm.cld.sr -x root -P Ez9TrB6uWi -N module4.2 -r "role[webserver]"
+--  knife bootstrap uvo1dhdxozaacfc1jlv.vm.cld.sr -x root -P Fu41IV3w5c -N module4.3
+
+--  knife bootstrap uvo1p95nu87kdlemr0l.vm.cld.sr -x root -P Lq01bt0c84 -N module4.4 -r "role[webserver2]"
+
+--  knife bootstrap ec2-52-90-239-3.compute-1.amazonaws.com -x ec2-user -i  ~/.ssh/knife.pem --sudo -N tlibrary  –sudo -r "role[webserver2]"
+--  knife bootstrap ec2-54-149-17-32.us-west-2.compute.amazonaws.com -x ec2-user -i  ~/.ssh/chef-key-pair-uswest2.pem  --sudo -N amazon_chef1 --run-list 'recipe[learn_chef_httpd]'
+
+***********  
+
+
+
+**********
+runing knife with ssh
+**********
+knife bootstrap ADDRESS --ssh-user USER --ssh-password 'PASSWORD' --sudo --use-sudo-password --node-name node1 --run-list 'recipe[learn_chef_httpd]'
+
+knife bootstrap uvo1e50ytrzf4h1rzqj.vm.cld.sr --ssh-user root --ssh-password 'Ez9TrB6uWi' --sudo --use-sudo-password --node-name  module4.2 --run-list 'recipe[learn_chef_httpd]'
+
+ssh root@uvo1e50ytrzf4h1rzqj.vm.cld.sr
+ssh root@uvo1p95nu87kdlemr0l.vm.cld.sr
+
+
+
+
+
+ssh -i "chef-key-pair-uswest2.pem" ec2-user@ec2-52-37-72-189.us-west-2.compute.amazonaws.com
+knife bootstrap ec2-52-37-72-189.us-west-2.compute.amazonaws.com -x ec2-user -i  ~/.ssh/chef-key-pair-uswest2.pem  --sudo -N gaa_node_library
+
+ec2-52-37-68-16.us-west-2.compute.amazonaws.com
+ssh -i "chef-key-pair-uswest2.pem" ec2-user@ec2-52-37-68-16.us-west-2.compute.amazonaws.com
+knife bootstrap ec2-52-37-68-16.us-west-2.compute.amazonaws.com -x ec2-user -i  ~/.ssh/chef-key-pair-uswest2.pem  --sudo -N gaa_node_library1 --bootstrap-version 11.4.4
+
+
+
+ec2-52-36-224-207.us-west-2.compute.amazonaws.com
+knife bootstrap ec2-52-36-224-207.us-west-2.compute.amazonaws.com -x ec2-user -i  ~/.ssh/chef-key-pair-uswest2.pem  --sudo -N gaa_node_library1 --bootstrap-version 11.4.4
+ssh -i "chef-key-pair-uswest2.pem" ec2-user@ec2-52-36-224-207.us-west-2.compute.amazonaws.com
+
+
+ec2-52-37-170-244.us-west-2.compute.amazonaws.com
+knife bootstrap ec2-52-37-170-244.us-west-2.compute.amazonaws.com -x ec2-user -i  ~/.ssh/chef-key-pair-uswest2.pem  --sudo -N gaa_node_library1 
+ssh -i "chef-key-pair-uswest2.pem" ec2-user@ec2-52-37-170-244.us-west-2.compute.amazonaws.com
+ssh -i -A "chef-key-pair-uswest2.pem" ec2-user@ec2-52-37-170-244.us-west-2.compute.amazonaws.com 'git ls-remote git@github.com:Gabrielvargas7/WebApplication1.git'
+
+
+
+
+****
+create first cookbook 
+****
+-- 7$ knife cookbook create name_cookbook
+-- knife cookbook create apache
+
+***
+upload cookbook to the chef server  
+***
+
+-- knife cookbook upload apache
+-- knife cookbook upload gaa_cookbook_library_conf --force
+
+---> upload all cookbooks 
+ knife upload cookbooks
+
+
+****
+run list
+****
+
+-- knife node run_list add module2 "recipe[apache]"
+
+--->location of the recipies /var/chef/cache/cookbooks
+
+
+*********
+run chef-client on the remote server
+*********
+
+sudo chef-client
+
+
+*****
+get the information with ohai on server client
+****
+
+-- ohai hostname
+
+
+****
+get the information with knife on development machine  
+****
+
+knife node show module2
+
+knife node show module2 -a hostname
+
+knife node show module2 -a apache
+
+
+******
+upload a role to the chef server
+******
+--- knife role from file webserver.json
+
+
+****
+remove recipe from server
+****
+
+knife node run_list remove module2 "recipe[apache]"
+
+****
+add a role to the server  
+****
+
+knife node run_list add module2 "role[webserver]"
+
+
+
+
+
+****
+upload data bags to the server
+***
+
+knife upload .\data_bags\vhosts
+
+
+
+
+
+*********************** 
+chefDK generate a templete and cookbook and repo
+************************
+
+---  chef generate repo ~/chef-repo
+---- chef generate cookbook learn_chef_httpd
+---- chef generate template cookbooks/learn_chef_httpd index.html
+---- chef generate template cookbooks/gaa_cookbook_library_conf index.html
+
+---  chef generate recipe cookbooks/customers user
+--- chef generate attribute cookbooks/customers default
+-- chef generate cookbook cookbooks/motd-rhel
+--chef generate template cookbooks/motd-rhel server-info
+--- chef generate cookbook cookbooks/gaa_cookbook_library_app
+-- chef generate recipe ../../cookbooks/awesome_customers_rhel firewall
+
+-- chef generate file wrap-ssh4git.sh
+
+
+*********************** 
+Kitchen test 
+************************
+
+-- kitchen list
+-- kitchen create
+-- kitchen converge
+-- kitchen login
+-- kitchen destroy
+-- kitchen login default-centos-71
+
+
+*********************** 
+Search cookbook 
+************************
+
+--- knife cookbook site show selinux | grep latest_version
+
+
+*****
+run the recipies on local mode
+*****
+---- sudo chef-client --local-mode --runlist 'recipe[learn_chef_httpd]'
+
+
+***********
+create a key on data bag
+***********
+openssl rand -base64 512 | tr -d '\r\n' > ~/Documents/chef-repo/.chef/encrypted_data_bag_secret
+
+
+*************
+Berksfile
+*************
+
+berks install
+berks upload
+
+-- remove frozen 
+berks update -o [--no-freeze]
+---- knife cookbook upload gaa_cookbook_library_conf --force
+
+
+******** create a cookbook with berks
+
+berks cookbook jaxrs_tutorial
+
+
+
+
+************* 
+  download chef from the supermarket and upziped
+************
+
+knife cookbook site download learn_chef_httpd
+tar -zxvf learn_chef_httpd-0.2.0.tar.gz -C cookbooks
+
+
+
+cp -r ~/Documents/chef-repo/.chef/  ~/chef-repo/.chef/
+
+
+
+**********
+  amazon
+***********
+
+---> knife ec2 --help 
+
+****************
+client 
+***************
+
+knife cookbook site download chef-client
+knife cookbook site download cron
+knife cookbook site download logrotate
+knife cookbook site download windows
+
+knife cookbook site download chef_rvm
+knife cookbook site download gpg
+knife cookbook site download chef_gem
+knife cookbook site download build-essential
+
+knife cookbook site download sudo
+knife cookbook site download curl
+knife cookbook site download java_se
+
+knife cookbook site download yum-epel
+knife cookbook site download openssl 
+knife cookbook site download java
+knife cookbook site download tomcat
+knife cookbook site download apt
+knife cookbook site download chef-sugar
+knife cookbook site download yum
+
+knife cookbook site download application
+knife cookbook site download poise 2.4.0
+knife cookbook site download poise-service 1.0.0
+knife cookbook site download application_git
+knife cookbook site download git
+knife cookbook site download windows
+knife cookbook site download dmg
+knife cookbook site download build-essential 
+knife cookbook site download chef_handler
+knife cookbook site download 7-zip
+
+
+
+tar -zxvf chef-client-4.3.2.tar.gz -C cookbooks
+tar -zxvf cron-1.7.3.tar.gz -C cookbooks
+tar -zxvf logrotate-1.9.2.tar.gz -C cookbooks
+tar -zxvf windows-1.39.1.tar.gz -C cookbooks
+
+tar -zxvf chef_rvm-1.0.5.tar.gz -C cookbooks
+tar -zxvf gpg-0.2.2.tar.gz -C cookbooks
+tar -zxvf chef_gem-0.1.0.tar.gz -C cookbooks
+tar -zxvf build-essential-2.2.4.tar.gz -C cookbooks
+tar -zxvf apt-2.9.2.tar.gz -C cookbooks
+tar -zxvf sudo-2.9.0.tar.gz -C cookbooks
+tar -zxvf curl-2.0.1.tar.gz -C cookbooks
+tar -zxvf java_se-8.74.0.tar.gz -C cookbooks
+
+tar -zxvf yum-epel-0.6.5.tar.gz -C cookbooks
+tar -zxvf openssl-4.4.0.tar.gz -C cookbooks
+tar -zxvf java-1.39.0.tar.gz -C cookbooks
+tar -zxvf tomcat-1.0.1.tar.gz -C cookbooks
+tar -zxvf apt-2.9.2.tar.gz -C cookbooks
+tar -zxvf chef-sugar-3.3.0.tar.gz -C cookbooks
+tar -zxvf yum-3.10.0.tar.gz -C cookbooks
+tar -zxvf application_java-3.0.0.tar.gz -C cookbooks
+tar -zxvf application-3.0.0.tar.gz -C cookbooks
+
+
+tar -zxvf poise-2.4.0.tar.gz -C cookbooks
+tar -zxvf application-5.1.0.tar.gz -C cookbooks
+tar -zxvf poise-service-1.0.0.tar.gz -C cookbooks
+
+tar -zxvf application_git-1.0.0.tar.gz -C cookbooks
+tar -zxvf git-4.3.7.tar.gz -C cookbooks
+tar -zxvf windows-1.39.1.tar.gz -C cookbooks
+tar -zxvf dmg-2.3.0.tar.gz -C cookbooks
+tar -zxvf chef_handler-1.3.0.tar.gz -C cookbooks
+tar -zxvf 7-zip-1.0.2.tar.gz -C cookbooks
+
+
+---clean all gz files 
+
+rm -rf *.gz
+
+
+# yum install gcc-c++ patch readline readline-devel zlib zlib-devel 
+# yum install libyaml-devel libffi-devel openssl-devel make 
+# yum install bzip2 autoconf automake libtool bison iconv-devel sqlite-devel
+
+yum remove  gcc-c++ patch readline readline-devel zlib zlib-devel 
+yum remove  libyaml-devel 
+
+*****************
+remove chef client
+****************
+1- rpm -qa *chef*
+  $ chef-12.7.2-1.el7.x86_64
+2.-sudo yum remove chef-12.7.2-1.el7.x86_64  
+
+

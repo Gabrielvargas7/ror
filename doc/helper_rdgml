@@ -1,0 +1,690 @@
+helper_rdgml
+
+-- Rails 2.3.17
+
+gem install rails -v 2.3.17
+
+********************
+** URL rdgml
+********************
+
+http://ngawest2.berkeley.edu
+
+********************
+** restart app
+********************
+
+before to start the app run this 
+Note: start like a root 
+
+/bin/bash --login  (this tell the terminal to be use like login shell, so you can use something like "rvm user 1.9.3-...." on sh file)
+
+
+ ./restart_rdgml.sh
+
+www/peer3/rails_apps/rdgml
+
+
+
+--- run the process on the background(&) 
+	
+	
+nohup ./restart_rdgml.sh &	
+ 	
+
+--->run app on Rails 2.3
+./script/server
+
+
+
+
+
+********************
+** copy to my Computer
+********************
+-- delete the folder pedms1 from /home/gabrielvargas7/last_rdgml_archive/ 
+rm -rf /home/gabrielvargas7/last_rdgml_archive/
+
+-- cpy files form your computer to server 
+scp -r  /Users/gabrielvargas7/Documents/rdgml_files peer.berkeley.edu:/home/gabrielvargas7/last_rdgml_archive
+
+
+-- copy files from server to your computer
+scp -r peer.berkeley.edu:/www/peer3/rails_apps/rdgml_passenger/  /Users/gabrielvargas7/Documents/rails/rdgml_passenger
+
+
+-- copy file from your folder to the server 
+cp -r /home/gabrielvargas7/last_rdgml_archive/rdgml_files/searches_controller.rb /www/peer3/rails_apps/rdgml/app/controllers/searches_controller.rb
+cp -r /home/gabrielvargas7/last_rdgml_archive/rdgml_files/search.rb /www/peer3/rails_apps/rdgml/app/models/search.rb
+
+cp -r /home/gabrielvargas7/last_rdgml_archive/rdgml_files/search.rb /home/gabrielvargas7
+
+
+********************
+** Backup wesite,   
+********************
+copy all the files to you personal folder with the date
+(image and personal files are very inportan)
+
+cp -r /www/peer3/rails_apps/rdgml/ /home/gabrielvargas7/backup/rdgml/09_24_2014/rdgml
+cp -r /www/peer3/rails_apps/rdgml/ /www/peer3/rails_apps/rdgml_11_17_2014_backup
+
+
+copy the file to remplace
+
+********************
+** copy the file to remplace   
+********************
+
+cp -r /home/gabrielvargas7/last_rdgml_archive/search.rb /www/peer3/rails_apps/rdgml/app/models/search.rb
+
+
+
+********************
+** restart,   
+********************
+source "/usr/local/rvm/scripts/rvm"
+rvm use ruby-1.9.3-p484
+
+echo "Run as Root!"
+/www/peer3/rails_apps/rdgml/stop_rdgml.sh
+/www/peer3/rails_apps/rdgml/start_rdgml.sh
+echo `date` | mail -s ngawest2_RESTARTING peer_sysadmin@lists.berkeley.edu
+~                                                                                
+
+********************
+** Start   
+********************
+
+source "/usr/local/rvm/scripts/rvm"
+rvm use ruby-1.9.3-p484
+
+cd /www/peer3/rails_apps/rdgml
+#export RAILS_ENV=production
+/usr/local/rvm/rubies/ruby-1.9.3-p484/bin/ruby script/server -p 4001 &
+/usr/local/rvm/rubies/ruby-1.9.3-p484/bin/ruby script/server -p 4002 &
+/usr/local/rvm/rubies/ruby-1.9.3-p484/bin/ruby script/server -p 4003 &
+
+********************
+** stop   
+********************
+
+kill -9 `ps -ef | grep "script/server" | grep 4001 | grep -v grep | awk '{ print $2 }'`
+kill -9 `ps -ef | grep "script/server" | grep 4002 | grep -v grep | awk '{ print $2 }'`
+kill -9 `ps -ef | grep "script/server" | grep 4003 | grep -v grep | awk '{ print $2 }'`
+
+
+
+********************************************************************************
+********************
+** Start copy Archive files to the server 
+********************
+********************************************************************************
+
+1 .copy the files from your computer to the server 
+
+scp -r  /Users/gabrielvargas7/Documents/NGAEastProcessedPEA  peer.berkeley.edu:/home/gabrielvargas7/last_rdgml_archive
+
+
+cp -r /home/gabrielvargas7/last_rdgml_archive/NGAEastProcessedPEA/  /archive/ngawest2_files/NGAEastProcessedPEA/
+
+
+
+
+
+
+********************************************************************************
+********************
+** End copy Archive files to the server 
+********************
+********************************************************************************
+
+
+
+####################
+log 
+####################
+ 
+-- copy mysql log to my folder  
+
+cp -r /www/peer3/rails_apps/rdgml/log/development.log  /home/gabrielvargas7/development.log
+
+-- copy to my computer, open terminal on my computer
+
+scp -r peer.berkeley.edu:/www/peer3/rails_apps/rdgml/log/development.log  /Users/gabrielvargas7/Documents/
+
+scp -r peer.berkeley.edu:/home/gabrielvargas7/03_04_2015_rdgml.sql /Users/gabrielvargas7/Documents/backup_files/
+
+scp -r peer.berkeley.edu:/home/gabrielvargas7/backup/rdgml/05_08_2015_rdgml_dev_backup.sql /Users/gabrielvargas7/Documents/rdgml_files/
+
+
+scp -r peer.berkeley.edu:/archive/ngawest2_files/NGAEastProcessedPEA /Users/gabrielvargas7/Documents/rdgml_files/
+
+
+copy to the server 
+scp -r /Users/gabrielvargas7/Documents/backup_files/03_04_2015_rdgml.sql  library.peer.berkeley.edu:/home/gabrielvargas7 
+
+scp -r /Users/gabrielvargas7/Documents/rdgml_files/NGAEastProcessedPEA library.peer.berkeley.edu:/home/app_peer/archive/ 
+
+scp -r /Users/gabrielvargas7/Documents/rdgml_files/NGAWest2 peer-prod-01.ist.berkeley.edu:/www/peer3/rails_apps/html/rdgml_passenger/shared/archive/ngawest2_files
+
+scp -r /Users/gabrielvargas7/Documents/rdgml_files/05_08_2015_rdgml_dev_backup.sql  peer-prod-01.ist.berkeley.edu:/home/gabrielvargas7/ 
+
+
+/****** copy only files/  
+scp -r /Users/gabrielvargas7/Documents/rdgml_files/PARK2004_BASE4_ACA/* peer-prod-01.ist.berkeley.edu:/www/peer3/rails_apps/html/rdgml_passenger/shared/archive/ngawest2_files/NGAWest2/PARK2004/BASE4.ACA/
+
+scp -r /Users/gabrielvargas7/Documents/rdgml_files/PARK2004_BASE4_ACA/* peer.berkeley.edu:/archive/ngawest2_files/NGAWest2/PARK2004/BASE4.ACA/
+
+scp -r /Users/gabrielvargas7/Documents/rdgml_files/PARK2004_DUR_ACA/* peer-prod-01.ist.berkeley.edu:/www/peer3/rails_apps/html/rdgml_passenger/shared/archive/ngawest2_files/NGAWest2/PARK2004/DUR.ACA/
+
+
+scp -r /Users/gabrielvargas7/Documents/rdgml_files/PARK2004_DUR_ACA/* peer.berkeley.edu:/archive/ngawest2_files/NGAWest2/PARK2004/DUR.ACA/
+
+
+DUR.ACA
+
+
+mv -v /www/peer3/rails_apps/html/rdgml_passenger/shared/archive/NGAWest2/  /www/peer3/rails_apps/html/rdgml_passenger/shared/archive/ngawest2_files/NGAWest2/
+
+
+mv -v /www/peer3/rails_apps/html/rdgml_passenger/shared/archive/NGAEastProcessedPEA/  /www/peer3/rails_apps/html/rdgml_passenger/shared/archive/ngawest2_files/NGAEastProcessedPEA/
+
+####################
+dump file
+####################
+
+--- dump data to file 
+mysqldump --databases rdgml_development > /home/gabrielvargas7/03_04_2015_rdgml.sql  -u root -p
+
+-- create without --database, so create to specific db
+mysqldump -u username -p database_name > dump.sql
+mysqldump rdgml_development > /home/gabrielvargas7/03_11_2015_rdgml.sql  -u root -p
+
+--- only tables 
+mysqldump --no-data -u root -p --databases rdgml_development > only_tables.sql
+
+
+
+-- load data to mysql 
+
+mysql -u username -p -h localhost DATA-BASE-NAME < data.sql
+
+mysql -u root  -h localhost rdgml_development < rdgml_development_dump141022
+
+mysql -u root  -h localhost rdgml_development < rdgml_development.sql
+
+mysql -u root -p  -h localhost rdgml_dev < /Users/gabrielvargas7/Documents/backup_files/03_04_2015_rdgml.sql
+
+mysql -u root -p  -h localhost rdgml_production < /home/gabrielvargas7/03_11_2015_rdgml.sql
+
+mysql -u root -p  -h localhost rdgml_development < /home/gabrielvargas7/05_08_2015_rdgml_dev_backup.sql
+
+mysql -u root -p  -h localhost rdgml_development < 03_11_2015_rdgml.sql
+
+mysql -u root -p  -h localhost rdgml_production < only_tables.sql
+
+
+chown -R apache:rvm rdgml
+
+----get in to the folder pedms1 and the run
+
+find . -type f -exec chmod 664 {} \;
+find . -type d -exec chmod 775 {} \;
+chmod a+x *.sh
+chmod a+x script/*
+
+
+
+cp -r /www/peer3/rails_apps/rdgml_10_22_2014_backup/config/database.yml /www/peer3/rails_apps/rdgml/config/database.yml 
+
+cp -r /www/peer3/rails_apps/rdgml_10_22_2014_backup/restart_rdgml.sh /www/peer3/rails_apps/rdgml/restart_rdgml.sh
+
+cp -r /www/peer3/rails_apps/rdgml_10_22_2014_backup/start_rdgml.sh /www/peer3/rails_apps/rdgml/start_rdgml.sh
+
+cp -r /www/peer3/rails_apps/rdgml_10_22_2014_backup/stop_rdgml.sh /www/peer3/rails_apps/rdgml/stop_rdgml.sh
+
+
+restart_rdgml.sh
+
+
+
+----- 
+install gem on old version ruby 
+
+rake gems:install
+
+
+-------- server test
+fgrep mail *.sh
+
+--- check running prosess
+crontab -l
+
+redirect to rdgml
+
+Redirect /smcat http://ngawest2.berkeley.edu
+
+
+
+cp -r /www/peer3/rails_apps/rdgml /www/peer3/rails_apps/rdgml_passenger
+
+##############
+new path
+##############
+
+# 01-30-2014 GV add new rdgml on passenger     
+	Alias /rdgml "/www/peer3/rails_apps/rdgml_passenger/public"
+        <Location /rdgml_passenger>
+                PassengerBaseURI /rdgml_passenger
+                PassengerAppRoot /www/peer3/rails_apps/rdgml_passenger
+                PassengerRuby /usr/local/rvm/gems/ruby-1.9.3-p484/wrappers/ruby
+        </Location>
+
+        <Directory /www/peer3/rails_apps/rdgml_passenger/public>
+                # This relaxes Apache security settings. 
+               AllowOverride all
+                # MultiViews must be turned off. 
+               Options -MultiViews
+
+        </Directory>
+
+
+
+
+
+# 01-29-2015 GV remove passanger until find the problem
+	RackEnv production
+	PassengerEnabled on
+	PassengerUploadBufferDir /usr/local/apache/tmp
+	PassengerTempDir /usr/local/apache/tmp
+	PassengerDefaultUser apache
+	PassengerDefaultGroup apache
+	PassengerLogLevel 3
+	PassengerDebugLogFile /var/log/httpd/passenger.log
+
+
+  
+
+        <Location /rdgml_passenger>
+                PassengerBaseURI /rdgml_passenger
+                PassengerAppRoot /www/peer3/rails_apps/rdgml_passenger
+                PassengerRuby /usr/local/rvm/gems/ruby-1.9.3-p484/wrappers/ruby
+        </Location>
+
+        <Directory /www/peer3/rails_apps/rdgml_passenger/public>
+                # This relaxes Apache security settings. 
+               AllowOverride all
+                # MultiViews must be turned off. 
+               Options -MultiViews
+
+        </Directory>
+
+
+
+
+<VirtualHost *:80>
+#02-02-2015 GV adding Passenger 
+  ServerName ngawest2.berkeley.edu
+  ServerAlias ngawest2.berkeley.edu
+
+    RackEnv production
+	PassengerEnabled on
+	PassengerUploadBufferDir /usr/local/apache/tmp
+	PassengerTempDir /usr/local/apache/tmp
+	PassengerDefaultUser apache
+	PassengerDefaultGroup apache
+	PassengerLogLevel 3
+	PassengerDebugLogFile /var/log/httpd/passenger.log
+  
+   DocumentRoot /www/peer3/rails_apps/rdgml_passenger/public
+
+   PassengerBaseURI /rdgml_passenger
+   PassengerAppRoot /www/peer3/rails_apps/rdgml_passenger
+   PassengerRuby /usr/local/rvm/gems/ruby-1.9.3-p484/wrappers/ruby
+
+   <Directory /www/peer3/rails_apps/rdgml_passenger/public>
+                # This relaxes Apache security settings. 
+               AllowOverride all
+                # MultiViews must be turned off. 
+               Options -MultiViews
+
+    </Directory>
+
+
+
+# 02-02-2015 GV disable mongrel 
+#  ServerName ngawest2.berkeley.edu
+#  ServerAlias ngawest2.berkeley.edu
+  
+ # DocumentRoot /www/peer3/rails_apps/rdgml/public
+
+# 01-29-2015 down the time until find the error rdgml
+ 
+#  Timeout 90000
+#  ProxyTimeout 90000
+#  Timeout 300
+#  ProxyTimeout 300
+
+#  ProxyPass / balancer://mongrelcluster/
+#  ProxyPassReverse / balancer://mongrelcluster/
+#  ProxyPreserveHost on
+
+ # <Proxy *>
+ #   Order deny,allow
+ #   Allow from all
+ # </Proxy>
+
+  # Custom log file locations
+ # ErrorLog  /var/log/httpd/ngawest2/error.log
+ # CustomLog /var/log/httpd/ngawest2/access.log combined
+
+ # <Proxy balancer://mongrelcluster>
+ #   BalancerMember http://peer.berkeley.edu:4001
+ #   BalancerMember http://peer.berkeley.edu:4002
+ #   BalancerMember http://peer.berkeley.edu:4003
+ # </Proxy>
+</VirtualHost>
+
+
+#GV 01-28-2015
+Redirect /smcat http://ngawest2.berkeley.edu
+
+#GV 03-02-2015
+Redirect /nga http://ngawest2.berkeley.edu
+Redirect /svbin http://ngawest2.berkeley.edu
+
+
+
+*************************************************
+*************************************************
+*************************************************
+tranfer rdgml 
+*************************************************
+*************************************************
+*************************************************
+
+
+gem install rails -v 2.3.17
+
+-->maybe need to downgrade gem -v 
+gem update --system 1.8.25
+
+--->run app
+./script/server
+
+
+
+******************
+******************
+rdgml -> change id 
+******************
+******************
+
+DELETE FROM `rdgml_development`.`searches` WHERE id >0;
+
+ALTER TABLE `rdgml_development`.`searches` AUTO_INCREMENT = 1;
+
+DELETE FROM `rdgml_development`.`spectras` WHERE id >0;
+
+ALTER TABLE `rdgml_development`.`spectras` AUTO_INCREMENT = 1;
+
+SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'rdgml_development' AND   TABLE_NAME   = 'searches';
+
+SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'rdgml_development' AND   TABLE_NAME   = 'spectras';
+
+
+**************************
+**************************
+Change made is July
+**************************
+
+controllers:
+    searches_controller
+    spectras_sontroller
+models:
+    search.rb
+views:
+    layouts:
+        application.html.erb
+    searches:
+        _searches_form.html.erb
+    site:
+        documentation.html.erb
+        index.html.erb
+
+******************
+-- backup database 
+mysqldump -u root -p --databases rdgml_development > 09_14_2015_rdgml_dev_local_backup.sql
+
+
+-- copy files to server 
+scp -r /Users/gabrielvargas7/Documents/rdgml_files/change_06_2015/searches_template_1.sql  peera.berkeley.edu:/home/gabrielvargas7/change_09_2015/searches_template_1.sql
+scp -r /Users/gabrielvargas7/Documents/rdgml_files/change_06_2015/z_ngaeast_recordmetadata.sql  peer.berkeley.edu:/home/gabrielvargas7/change_06_2015/z_ngaeast_recordmetadata.sql 
+
+-- sep 15 2015
+scp -r /Users/gabrielvargas7/Documents/rdgml_files/change_09_2015/150908ngaeasttablesupdate.sql  peer.berkeley.edu:/home/gabrielvargas7/change_09_2015/150908ngaeasttablesupdate.sql
+scp -r /Users/gabrielvargas7/Documents/rdgml_files/change_09_2015/zz_psadata_rotd100updated150908.sql peer.berkeley.edu:/home/gabrielvargas7/change_09_2015/zz_psadata_rotd100updated150908.sql
+scp -r /Users/gabrielvargas7/Documents/rdgml_files/change_09_2015/z1_ngaeast_durationdataprocessed.sql peer.berkeley.edu:/home/gabrielvargas7/change_09_2015/z1_ngaeast_durationdataprocessed.sql
+scp -r /Users/gabrielvargas7/Documents/rdgml_files/change_09_2015/z1_ngaeast_recordqualityflag.sql peera.berkeley.edu:/home/gabrielvargas7/change_09_2015/z1_ngaeast_recordqualityflag.sql
+
+z1_ngaeast_recordqualityflag.sql
+
+
+
+-- run sql file.
+mysql -u root -p rdgml_development < searches_template_1.sql
+
+-- sep 15 2015
+mysql -u root -p rdgml_development < 150908ngaeasttablesupdate.sql
+mysql -u root -p rdgml_development < zz_psadata_rotd100updated150908.sql
+mysql -u root -p rdgml_development < z1_ngaeast_durationdataprocessed.sql
+mysql -u root -p rdgml_development < z1_ngaeast_recordqualityflag.sql
+
+
+
+
+-- rename table 
+RENAME TABLE z_ngaeast_recordmetadata TO z_ngaeast_recordmetadata_preJune2015;
+RENAME TABLE z_ngaeast_recordmetadata TO z_ngaeast_recordmetadata_preJune2015;
+
+-- sep 15 2015
+RENAME TABLE zz_psadata TO zz_psadata_pre_sep2015;
+RENAME TABLE zz_psadata_rotd100updated150908 TO zz_psadata;
+ALTER TABLE searches ADD useableperiodrange varchar(255) DEFAULT NULL;
+
+
+
+
+
+
+-- run sql file.
+mysql -u root -p rdgml_development < z_ngaeast_recordmetadata.sql
+RENAME TABLE z_ngaeast_recordmetadata_new TO z_ngaeast_recordmetadata;
+RENAME TABLE z_ngaeast_recordmetadata_preJune2015 TO z_ngaeast_recordmetadata;
+
+
+
+-- last step- restart the server and app
+ /sbin/service httpd restart
+touch restart.txt 
+/etc/init.d/mysqld restart
+passenger-config restart-app /www/peer3/rails_apps/html/rdgml_passenger/current  
+
+
+***** new server 
+sudo /sbin/service mysqld restart
+sudo /sbin/service httpd restart
+sudo /bin/su -l app_peer
+
+passenger-status
+passenger-memory-stats
+kill 12138
+kill 15903 
+
+sudoedit /etc/httpd/peer.d/httpd-ngawest2-site.conf
+
+--instance
+passenger-config detach-process --instance /www/peer3/rails_apps/html/rdgml_passenger/current 30996
+ps aux | grep rails
+
+passenger-status --show=xml
+
+
+ARCHIVE_TMP_PATH: "/home/app_peer/rdgml_archive/tmp/"
+
+ARCHIVE_TMP_PATH: "/www/peer3/rails_apps/html/rdgml_passenger/shared/tmp/"
+                   /www/peer3/rails_apps/html/rdgml_passenger/shared/
+
+sudoedit /www/peer3/rails_apps/html/rdgml_passenger/shared/config/application.yml
+
+
+#GV 02-9-2015 run at 2am every day, -->  delete temp files older that 1 days
+0 2 * * * find /www/peer3/rails_apps/html/rdgml_passenger/shared/tmp/ -type f -mtime +1 -exec rm -rf {} \;
+
+
+
+
+********************
+Plan to tranfer database tables from development to production change 11-02-2015
+********************
+-- backup development
+   mysqldump --databases rdgml_development > /home/gabrielvargas7/11_02_2015_rdgml_developent_server.sql  -u root -p
+
+-- backup production
+   mysqldump --databases rdgml_development > /home/gabrielvargas7/11_02_2015_3.30rdgml_production_server.sql  -u root -p
+
+    mysqldump --databases rdgml_development > /home/gabrielvargas7/11_10_2015_10.30rdgml_production_server.sql  -u root -p
+
+
+-- copy tables to file 
+
+
+    searches
+    mysqldump -u root -p rdgml_development searches > /home/gabrielvargas7/change_11_10_2015/11_10_2015_searches_table.sql
+
+    spectras
+    mysqldump -u root -p rdgml_development spectras > /home/gabrielvargas7/change_11_10_2015/11_10_2015_spectras.sql
+
+    z4_file_downloads
+    mysqldump -u root -p rdgml_development z4_file_downloads > /home/gabrielvargas7/change_11_10_2015/11_10_2015_z4_file_downloads.sql
+    
+    users
+    mysqldump -u root -p rdgml_development users > /home/gabrielvargas7/change_11_10_2015/11_10_2015_users_table.sql
+
+
+
+-- copy development to local computer 
+   scp -r  gabrielvargas7@peera.berkeley.edu:/home/gabrielvargas7/11_02_2015_rdgml_developent_server.sql  /Users/gabrielvargas7/Documents/support_files/rdgml_files/change_11_02_2015/11_02_2015_rdgml_developent_server.sql
+
+mysqldump -uroot -pmypassword -a --databases rdgml_development   | ssh gabrielvargas7@peer-prod-01.ist.berkeley.edu "mysql -uroot -pmypassword"
+
+
+
+
+-- copy  production tables to local computer, 
+    searches
+        scp -r  gabrielvargas7@peer.berkeley.edu:/home/gabrielvargas7/change_11_02_2015/11_02_2015_searches_table.sql /Users/gabrielvargas7/Documents/support_files/rdgml_files/change_11_02_2015/11_02_2015_searches_table.sql 
+    spectras
+        scp -r  gabrielvargas7@peer.berkeley.edu:/home/gabrielvargas7/change_11_02_2015/11_02_2015_spectras.sql /Users/gabrielvargas7/Documents/support_files/rdgml_files/change_11_02_2015/11_02_2015_spectras.sql
+
+    z4_file_downloads
+        scp -r  gabrielvargas7@peer.berkeley.edu:/home/gabrielvargas7/change_11_02_2015/11_02_2015_z4_file_downloads.sql /Users/gabrielvargas7/Documents/support_files/rdgml_files/change_11_02_2015/11_02_2015_z4_file_downloads.sql
+    users
+        scp -r gabrielvargas7@peer.berkeley.edu:/home/gabrielvargas7/change_11_02_2015/11_02_2015_users_table.sql /Users/gabrielvargas7/Documents/support_files/rdgml_files/change_11_02_2015/11_02_2015_users_table.sql
+    
+
+
+-- restore develoment to local computer 
+  
+    mysql -u root -p rdgml_development < 11_02_2015_rdgml_developent_server.sql
+
+    mysql -u root -p rdgml_development < 11_02_2015_rdgml_production_server.sql
+
+
+
+
+-- restore tables from production to local development 
+    mysql -u root -p rdgml_development < 11_02_2015_searches_table.sql 
+
+    mysql -u root -p  rdgml_development < 11_02_2015_spectras.sql 
+
+    mysql -u root -p  rdgml_development < 11_10_2015_z4_file_downloads.sql 
+
+    mysql -u root -p  rdgml_development < 11_10_2015_users_table.sql
+
+
+-- restore to a remove server 
+
+    mysqldump -uroot -p123123 -a --databases rdgml_development | ssh gabrielvargas7@peera.berkeley.edu "mysql -uroot -pmypassword"
+
+
+
+
+****************
+change db 11-03-2015
+****************
+
+backup tables;
+
+
+ searches
+    mysqldump -u root -p rdgml_development searches > /home/gabrielvargas7/change_11_03_2015/11_02_2015_searches_table.sql
+
+    spectras
+    mysqldump -u root -p rdgml_development spectras > /home/gabrielvargas7/change_11_03_2015/11_02_2015_spectras.sql
+
+
+
+DELETE FROM `rdgml_development`.`searches` WHERE id >0;
+
+ALTER TABLE `rdgml_development`.`searches` AUTO_INCREMENT = 1;
+
+DELETE FROM `rdgml_development`.`spectras` WHERE id >0;
+
+ALTER TABLE `rdgml_development`.`spectras` AUTO_INCREMENT = 1;
+
+SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'rdgml_development' AND   TABLE_NAME   = 'searches';
+
+SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'rdgml_development' AND   TABLE_NAME   = 'spectras';
+
+
+
+****************
+change db 2-16-2016  implementation  email-verification protocol
+****************
+
+Silvia Mazzoni <silviamazzoni@yahoo.com>
+12/18/15
+Gabriel,
+is there a way to validate email addresses?
+the current set up doesn't check the validity of the email addresses. Is there a way to confirm an address?
+We really need to set something up like this -- too many abusive downloads.
+thank you
+
+
+Frank MCKENNA <fmckenna@berkeley.edu>
+12/18/15
+to Silvia, me 
+the best way to validate an email address is to not allow access to the site until the code received in an email sent to the sign up email has been entered by the user. it should be easy to implement, another column in the user table. but user has to go through the email address. other methods such as checking to see if the email adress by checking to see if valid server do not work well (i know from experience!).
+
+
+Silvia Mazzoni <silviamazzoni@yahoo.com>
+12/18/15
+to Frank, me 
+i like that, the confirming email would be sent immediately, right?
+we need to do this with the new year.
+
+
+Gabriel Vargas <gabrielvargas7@berkeley.edu>
+12/18/15
+to Silvia, Frank 
+Hi, Silvia 
+the rdgml application is using Devise gem and it support confirmation email.
+do you want me to implement it? 
+and see if that work for you. 
+
+
+
+
+

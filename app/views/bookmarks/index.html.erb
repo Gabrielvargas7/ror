@@ -1,0 +1,78 @@
+<h1>Listing bookmarks</h1>
+
+<h3><%= link_to 'New Bookmark', new_bookmark_path %> &nbsp;&nbsp;|&nbsp;&nbsp;
+    <%= link_to 'Bookmarks Approval ', index_bookmarks_approval_path %>
+</h3>
+
+
+<table class="table table-bordered">
+  <tr>
+
+    <th>Item id</th>
+    <th>Item name</th>
+    <th>Bookmarks category Id</th>
+    <th>Bookmarks category Name</th>
+
+
+    <th>Bookmarks id</th>
+    <th>Bookmark url</th>
+    <th>Title</th>
+    <th>I frame</th>
+    <th>Bookmark Image name</th>
+    <th>Bookmark Image name desc</th>
+    <th>Description</th>
+    <th>Like</th>
+
+
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @bookmarks.each do |bookmark| %>
+  <tr>
+    <%  if bookmark.bookmarks_category.item.nil? %>
+        <td></td>
+        <td></td>
+
+    <%  else %>
+        <td><%= bookmark.bookmarks_category.item_id %></td>
+        <td><%= bookmark.bookmarks_category.item.name %></td>
+    <%  end %>
+
+    <%  if bookmark.bookmarks_category.nil? %>
+        <td></td>
+        <td></td>
+
+    <%  else %>
+        <td><%= bookmark.bookmarks_category.id %></td>
+        <td><%= bookmark.bookmarks_category.name  %></td>
+    <%  end %>
+
+
+    <td><%= bookmark.id %></td>
+
+    <td ><%= bookmark.bookmark_url %></td>
+    <td><%= bookmark.title %></td>
+    <td><%= bookmark.i_frame %></td>
+    <td><%= image_tag bookmark.image_name.url().to_s,width:50 , height:50 %></td>
+    <td><%= image_tag bookmark.image_name_desc.url().to_s,width: 50, height:50 %></td>
+    <td><%= bookmark.description %></td>
+    <td><%= bookmark.like %></td>
+
+
+
+
+
+
+    <td><%= link_to 'Show', bookmark %></td>
+    <td><%= link_to 'Edit', edit_bookmark_path(bookmark) %></td>
+    <td><%= link_to 'Destroy', bookmark, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+
+<br />
+
+

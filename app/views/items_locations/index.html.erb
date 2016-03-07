@@ -1,0 +1,55 @@
+<h1>Listing items_locations</h1>
+
+<h3>
+  <%= link_to 'New Items location', new_items_location_path %>
+
+</h3>
+
+<table class="table table-bordered">
+  <tr>
+    <th>Item id</th>
+    <th>Item name</th>
+
+    <th>Location id</th>
+    <th>Location name</th>
+    <th>Section id</th>
+    <th>Section name</th>
+
+
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @items_locations.each do |items_location| %>
+  <tr>
+
+    <%  if items_location.item.nil? %>
+        <td></td>
+        <td></td>
+
+    <%  else %>
+        <td><%= items_location.item.id  %></td>
+        <td><%= items_location.item.name  %></td>
+    <%  end %>
+
+
+    <%  if items_location.location.nil? %>
+        <td></td>
+        <td></td>
+
+    <%  else %>
+        <td><%= items_location.location.id  %></td>
+        <td><%= items_location.location.name  %></td>
+        <td><%= items_location.location.section.id  %></td>
+        <td><%= items_location.location.section.name  %></td>
+    <%  end %>
+
+
+    <td><%= link_to 'Show', items_location %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+

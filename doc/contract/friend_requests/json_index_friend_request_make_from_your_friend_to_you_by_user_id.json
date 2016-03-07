@@ -1,0 +1,37 @@
+// controller  ->  FriendRequestController
+// method type ->  get
+// method name ->  json_index_friend_request_make_from_your_friend_to_you_by_user_id
+
+// Security: private user
+
+
+//Description
+                //#GET get all the request that your friend make to you
+                //#  /friend_requests/json/index_friend_request_make_from_your_friend_to_you_by_user_id/:user_id
+                //#  /friend_requests/json/index_friend_request_make_from_your_friend_to_you_by_user_id/206.json
+                //#  //# success    ->  head  200 OK
+
+
+// back_end   :done
+// front_end :working
+
+[
+    {
+        "firstname": null,
+        "image_name": {
+            "url": "/assets/fallback/users_photos/default_user.png"
+        },
+        "lastname": null,
+        "profile_image": "y",
+        "user_id": 24
+    },
+    {
+        "firstname": null,
+        "image_name": {
+            "url": "http://res.cloudinary.com/hpdnx5ayv/image/upload/v1373412029/13940-users_photo-image_name-2012-02-21_19.23.53.jpg"
+        },
+        "lastname": null,
+        "profile_image": "y",
+        "user_id": 23
+    }
+]

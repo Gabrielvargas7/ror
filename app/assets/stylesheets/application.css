@@ -1,0 +1,125 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require bootstrap
+ *= require toastr
+ *= require toastr-responsive
+ *= require typeahead-bootstrap
+ *= require_self
+ *= require_tree .
+ */
+
+
+
+/* universal */
+
+
+body {
+    padding-top: 45px;
+
+}
+
+.center {
+    text-align: center;
+}
+
+.center h1 {
+    margin-bottom: 10px;
+}
+
+/* footer */
+
+footer {
+    margin-top: 45px;
+    padding-top: 5px;
+    border-top: 1px solid #eaeaea;
+    color: #999;
+}
+
+footer a {
+    color: #555;
+}
+
+footer a:hover {
+    color: #222;
+}
+
+footer small {
+    float: left;
+}
+
+footer ul {
+    float: right;
+    list-style: none;
+}
+
+footer ul li {
+    float: left;
+    margin-left: 10px;
+}
+/*Apply class to img to flip picture horizontally.*/
+.flipimg{
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+.hidden{
+    visibility:hidden;
+}
+/*Social Bar Style*/
+
+.pinterest_item img{
+
+}
+.info_button_item img{
+    width:50px;
+    height:auto;
+}
+.social_bar .navbar .nav > li > a{
+    padding:10px 5px 10px;
+}
+.social_bar .navbar{
+    border-spacing:0;
+}
+.dark_text{
+    color:#464646;
+}
+.social_bar li.info_button_item{
+    padding-top:8px;
+    width:30px;
+}
+.navbar .nav > li.info_button_item > a{
+    background-color: #00CCFF;
+    color:white;
+    border-radius:3px;
+    padding:3px;
+    font-size:13px;
+    width:45px;
+    height:20px;
+}
+/*Override Twitter Bootstrap Background Color*/
+.social_bar .navbar-inner{
+    background-image:none;
+    background-color: transparent;
+    border:none;
+}
+.social_bar{
+    background-color: rgba(255,255,255,.4);
+}
+
+/*End social bar style*/
+.toast-top-center{
+    top: 52px; 
+    left: 50%; 
+    margin-left: -150px; 
+}

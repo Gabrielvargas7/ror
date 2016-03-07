@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Item:</b>
+  <%  if @bundles_bookmark.bookmark.bookmarks_category.item.nil? %>
+    
+    
+<%  else %>
+    <%= @bundles_bookmark.bookmark.bookmarks_category.item.id %>
+    <%= @bundles_bookmark.bookmark.bookmarks_category.item.name %>
+<%  end %>
+
+
+</p>
+
+<p>
+  <b>Bookmark:</b>
+
+
+  <%  if @bundles_bookmark.bookmark.nil? %>
+    
+    
+    
+    
+ <%  else %>
+    <%= @bundles_bookmark.bookmark.id %>
+    <%= @bundles_bookmark.bookmark.bookmark_url.to_s %>
+    <%= @bundles_bookmark.bookmark.title  %>
+     <%= image_tag @bundles_bookmark.bookmark.image_name.url().to_s ,width: 50, height:50 %>
+<%  end %>
+
+
+
+</p>
+
+
+<%= link_to 'Edit', edit_bundles_bookmark_path(@bundles_bookmark) %> |
+<%= link_to 'Back', bundles_bookmarks_path %>

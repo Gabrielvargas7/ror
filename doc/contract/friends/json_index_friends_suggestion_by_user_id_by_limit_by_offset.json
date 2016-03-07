@@ -1,0 +1,31 @@
+// Security: private user
+
+
+// Description
+//# GET get all user friend by limit and offset
+//# Limit is the number of user that you want it
+//# Offset is where you want to start
+//#  /friends/json/index_friends_suggestion_by_user_id_by_limit_by_offset/:user_id/:limit/:offset'
+//#  /friends/json/index_friends_suggestion_by_user_id_by_limit_by_offset/206/10/0.json'
+//#  //# success    ->  head  200 OK
+//
+[
+    {
+        "firstname": null,
+        "image_name": {
+            "url": "/assets/fallback/users_photos/default_user.png"
+        },
+        "lastname": null,
+        "profile_image": "y",
+        "user_id": 18
+    },
+    {
+        "firstname": null,
+        "image_name": {
+            "url": "/assets/fallback/users_photos/default_user.png"
+        },
+        "lastname": null,
+        "profile_image": "y",
+        "user_id": 22
+    }
+]

@@ -1,0 +1,10 @@
+#####
+scafold 
+#####
+
+
+rails generate scaffold HighScore game:string score:integer
+
+rails generate scaffold GroupType name:string
+
+rails generate scaffold AccessType name:string 

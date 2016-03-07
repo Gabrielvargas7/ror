@@ -1,0 +1,238 @@
+
+
+********************************************************************************************
+********************************************************************************************
+12/02/2015 :=>  Wordpress
+-- Duration: 8 weeks
+***********************
+*********************** 
+WHY:
+-- the server crash when was spamer one wordpress, so to minimize need to update all wp and clean them.  
+
+DO:
+-- Insvestigate how many wordpress are is the server (50 Wp)
+-- clean all the wordpress that were is not use (20Wp)
+-- update all the wordpress to the last version. 
+
+STATUS: done 
+
+
+********************************************************************************************
+********************************************************************************************
+12/02/2015 :=>  opennavigator wp
+-- Duration: 2 weeks
+***********************
+*********************** 
+WHY: 
+-- the openavigator wp was spamer and crash the server  
+
+DO:
+-- add pluging to avoid spamer (recacha)
+-- clean all the spam data  
+-- update all the wordpress to the last version. 
+
+STATUS: Done
+
+
+
+********************************************************************************************
+********************************************************************************************
+12/05/2016 :=>  ground motion database (rdgml)
+-- Duration: 2 weeks
+***********************
+***********************
+WHY:
+-- silvia ask for a new update to the server.  
+
+DO: 
+-- push a new update to the server  
+-- test the updates and fix any problem on staging server and then in prodaction  
+
+STATUS: Done
+
+
+
+********************************************************************************************
+********************************************************************************************
+01/05/2016 :=>  Transfer PEER:Admin
+-- Duration: 2 weeks
+***********************
+***********************
+WHY:
+-- this will help to share docs easy, will be more secure, easier to manage user, escalable on space    
+
+DO: 
+-- investigate how to create a folder for peer deparment on box where many people can colaborate and add unlimited data  
+-- investigate how to transfer all the data from PEER:admin server to Box 
+-- transfer 300+ MB of data to box 
+
+STATUS: Done
+
+
+********************************************************************************************
+********************************************************************************************
+02/02/2016 :=>  Transfer PEER:SPWS
+-- Duration: 4 weeks
+***********************
+*********************** 
+WHY:
+-- this will help to share docs easy, will be more secure, easier to manage user, escalable on space    
+DO: 
+-- investigate how to create a folder for peer deparment on box where many people can colaborate and add unlimited data  
+-- investigate how to transfer all the data from PEER:SPWS server to Box 
+-- backup 500 G on the HD
+-- Tranfers 500G to Box
+
+STATUS: Done
+
+
+********************************************************************************************
+********************************************************************************************
+02/02/2016 :=>  Server support 
+-- Duration: 1 weeks
+***********************
+*********************** 
+WHY:
+-- the server is geting full on tmp files.     
+DO: 
+-- clean all files older than 30 days  
+-- create a new automatic task that clean all temp files.  
+
+STATUS: Done
+
+
+********************************************************************************************
+********************************************************************************************
+02/02/2016 :=>  wordpress ngawest2
+-- Duration: 1 day
+***********************
+*********************** 
+WHY:
+-- erika need access to ngawest2 WP.     
+DO: 
+-- create a admin user for erika on ngawest2 WP  
+
+STATUS: Done
+
+
+********************************************************************************************
+********************************************************************************************
+ :=>  Small Task 02/26/2016
+-- Duration: 1 days or least
+***********************
+*********************** 
+ 
+Date: 02/16  => Erika
+-- Request: can not upload doc to WP 
+-- Solution: restart apache server. 
+
+
+STATUS: done
+
+********************************************************************************************
+********************************************************************************************
+ :=>  Small Task 02/26/2016
+-- Duration: 1 days or least
+***********************
+*********************** 
+ 
+Date: 02/16  => Erika
+-- Request: create two new WP 
+-- Solution: install and setup two new WP (tbi-peer , tbi-retrofit )
+
+
+STATUS: done
+
+
+
+
+********************************************************************************************
+********************************************************************************************
+12/02/2015 :=>  SPO Systems
+-- Duration: 8 weeks
+***********************
+*********************** 
+WHY:
+-- add security to data permissions by user  
+
+DO:
+-- develop frontend feature for data permissions  => done
+-- develop backend features for data permissions  => done 
+-- update database with the new tables and data for permissions => done
+-- develop frontend feature for share data by user => planing. 
+
+
+STATUS: progress  
+
+
+********************************************************************************************
+********************************************************************************************
+02/02/2016 :=>  Transfer nisee library app
+-- Duration: 6 months
+***********************
+*********************** 
+why
+-- nees library app is on a very old server that does not have support on the OS and HD, also the app need an update.    
+do 
+-- understant how the library App are working (how was setup, technologies using) => progress   
+-- make a plan how to make it scalable(easy to deploy,easy to update)  => progress
+-- update the application with all conflits on versions. => planing  
+-- create the new server for the application => planing. 
+
+
+STATUS: progress
+
+
+
+
+********************************************************************************************
+********************************************************************************************
+02/12/2016 :=>  Ground Motion database rdgml
+-- Duration: 1 months
+***********************
+*********************** 
+why
+-- Silvia request the implementation of an email-verification protoco     
+do 
+-- investigations how implement email-verification => progress   
+week 02/16 to 02/19 
+--  investigations how implement email-verification 
+week 02/22 to 02/26 
+--  part 1 of implementation
+week 02/29 to 03/4 
+--  part 2 of implementation
+week 02/29 to 03/4 
+--  part 3 of testing and deployment
+
+
+STATUS: progress
+
+
+*****
+
+********************************************************************************************
+********************************************************************************************
+02/12/2016 :=>  Upgrade php version from 5.3.3 to 5.6
+-- Duration: 1 months
+***********************
+*********************** 
+why
+-- andreas need to install pluging on wp and need new version of php   
+do 
+week 03/07 to 03/11
+-- investigations how upgrade php  => progress   
+week 03/14 to 03/18
+--  part 1 of implementation on test server and then live server. 
+week 03/21 to 03/25
+--   part 2 of implementation on test server and then live server 
+week 03/28 to 04/01
+---  part 3 of implementation on test server and then live server 
+
+STATUS: progress
+
+
+
+
+
+
+
